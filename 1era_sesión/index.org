@@ -1,0 +1,323 @@
+#+TITLE: Programación funcional con Elixir
+#+SUBTITLE: Elixir Learning Group - WiT Perú
+#+DATE: 2017/10/21（Sabado）4:00pm
+#+AUTHOR: Albert Castellano Moreno
+#+EMAIL: acastemoreno@gmail.com
+#+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
+#+OPTIONS: e:t email:nil f:t inline:t num:nil p:nil pri:nil stat:t
+#+OPTIONS: tags:t tasks:t tex:t timestamp:t toc:nil todo:t |:t
+#+CREATOR: Emacs 25.2.1
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: es
+#+SELECT_TAGS: export
+
+#+GITHUB: http://github.com/acastemoreno
+
+#+FAVICON: images/elixir.png
+#+ICON: images/elixir.png
+
+** Amiguito. Quién eres?
+Formación:
+- Ingenierío Mecánico - Universidad Nacional de Ingeniería.
+Experiencia Laboral:
+- Ingeniero de Proyectos en Control System Integration
+- Elixirist (Alquimista) ♥
+
+Pueden llamarme *Amiguito*
+
+** Programación: Autodidacta
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 650px
+[[file:images/lenguajes.png]]
+#+END_CENTER
+
+** Objetivos:
+#+ATTR_HTML: :class build
+- Cambiar nuestro paradigma sobre programación.
+- Aprender conceptos sobre programación funcional.
+- Sentar una base solida sobre elixir (para posteriormente realizar proyectos).
+
+** Importante:
+#+ATTR_HTML: :class build
+- Cambiar a un nuevo paradigma es muy diferente de simplemente cambiar entre idiomas. Tienes que pensar diferente, o te meterás en problemas.
+- Reset your mind.
+- Aunque a futuro no uses a elixir como tu main language para programar (en nuestro mercado local no se necesita, pero si a nivel internacional); podras crecer como desarrolladora.
+- Seguro que podras conseguir más trabajo con otros lenguajes, pero no mejores trabajos.
+
+* Thinking Functionally
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+** Nuestro paradigma sobre programación está cambiando
+Las reglas que rigen la programación diaria típica estan cambiando. Eso no sucede a menudo. Cuando lo hace, *algo importante esta pasando*.
+
+** :O
+  :PROPERTIES:
+  :FILL:     images/asustado.jpg
+  :TITLE:    white
+  :SLIDE:    white
+  :END:
+
+** ¿Por qué funcional?
+#+ATTR_HTML: :class build fade
+- Un paradigma de programación consiste en las reglas y principios de diseño de software.
+- Algo en cómo estamos construyendo un software no cumple con las demandas modernas.
+- Necesitamos procesar múltiples tareas y enorme cantidad de datos de forma rápida y confiable.
+- La CPU no se está acelerando, no podemos simplemente escribir código y esperar que un nuevo CPU nos favoresca.
+- En cambio, tenemos múltiples núcleos o incluso máquinas.
+- Necesitamos escribir un código que aproveche la simultaneidad y el paralelismo.
+- Desafortunadamente, cuando trabajas en lenguajes imperativos convencionales y lenguajes orientados a objetos, es difícil.
+
+** Limitaciones de lenguajes convencionales
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 700px
+[[file:images/multithreaded_programming.jpg]]
+#+END_CENTER
+
+* Limitaciones de lenguajes convencionales
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 340px
+[[file:images/cpu0.jpg]]
+#+END_CENTER
+
+** Ejemplo (Memoria compartida)
+#+BEGIN_SRC ruby
+list = [1, 2, 3, 4]
+list.pop
+# => 4
+list.push(1)
+# => [1, 2, 3, 1]
+puts list.inspect
+# => [1, 2, 3, 1]
+#+END_SRC
+¿Qué podría pasar si, en medio de una operación, el valor cambia debido a otro proceso?
+
+*Es difícil de predecir. La programación funcional ofrece una mejor alternativa*
+
+* Programación Funcional
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+* Vista Rápida
+- La programación funcional es un paradigma de programación en el que las funciones son los componentes básicos, todos los valores son inmutables y el código es declarativo.
+- Cuando buscas programación funcional, aparecen muchos términos inusuales. Es como si estuviera hecho para matemáticos, no para programadores.
+
+** 
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 700
+file:images/haskell.png
+#+END_CENTER
+
+** Elixir viene a rescatarnos
+- La sintaxis simple y pragmática de Elixir lo hace accesible para todos, incluso para aquellos que no han aprendido el paradigma funcional. Elixir es un lenguaje robusto y listo para producción, y vive en el ecosistema de Erlang, que existe desde hace 30 años y ofrece software con confiabilidad de nueve segundos.
+- Con un lenguaje funcional como Elixir, tendrás un mejor uso del CPU , escribiendo un código más corto y más explícito.
+- Cuando aplicas el paradigma funcional en un lenguaje funcional, escribes un código que vive armoniosamente con el lenguaje.
+
+* Let's start
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+** Representando Valores
+- Valores son cualquier cosa que pueda presentar datos en elixir.
+- Abre tu consola y ejecuta =iex=
+#+BEGIN_SRC elixir
+iex> 10
+10 #Integer Type
+iex> "Holi Woli"
+"Holi Woli" #String Type
+#+END_SRC
+=Literals= son valores que los humanos podemos entender facilmente.
+
+** Asi que los valores tienen =Types=.
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+Si, la siguiente tabla muestra los =types= más comunes
+| Type    | Usado para                                               | Ejemplos                                                               |
+|---------+----------------------------------------------------------+------------------------------------------------------------------------|
+| string  | Textos                                                   | "Hello World", "Holi Woli"                                             |
+| integer | Numeros Enteros                                          | 42, 100, 1000, -34                                                     |
+| float   | Numeros Reales                                           | 10.8e10, 0.7654, -1.32                                                 |
+| boolean | Expresiones Logicas                                      | true, false                                                            |
+| atom    | Identificadores                                          | :ok, :error, :exit                                                     |
+| tuple   | Colección de tamaño conocido                             | {:ok, 1.32}, {:metros, 50}, {1,2,3}                                    |
+| list    | Colección de tamaño desconocido                          | [1,2,3,4], ["juanito, pepito"]                                         |
+| map     | Buscar un valor dentro de un diccionario mediante un key | %{nombre: "Albert", apellidos: "Castellano Moreno", alias: "Amiguito"} |
+| nil     | Representa ausencia de calor                             | nil                                                                |
+
+** Ejecutando codigo
+Elixir puede ejecutar y generar un resultado de  =expresiones=.
+#+BEGIN_SRC elixir
+iex> 42
+42
+iex> 1+1
+2
+iex> (2+2)*3
+12
+iex> 2+2*3
+#+END_SRC
+Cuando usamos diferentes =operadores=, ellos tienen un orden en el cual seran ejecutados, esto se llama =precedencia=[fn:1].
+
+** Ejecutando codigo
+#+BEGIN_SRC elixir
+iex> "Hello World!" + 5
+(ArithmeticError) bad argument in arithmetic expression ......
+iex> 37 + 3.7
+40.7
+#+END_SRC
+La ultima expresión no resulta en error debido a que la suma se da entre valores con el type =number= que consiste en la union de =integer= y =float=
+
+** Operadores más usadas
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+| Operador | Usado para                             | Ejemplos           |
+|----------+----------------------------------------+--------------------|
+| +        | Sumar numeros                          | 10 + 5, 3.7 + 8.1  |
+| -        | Restar numeros                         | 10 - 25, 9.7 - 8.1 |
+| /        | Dividir numero                         | 10 / 2, 0 / 10     |
+| *        | Multiplicar numero                     | 10 * 2, 1.5*3      |
+| ==       | 2 valores son iguales?                 | 1 == 1.0, 1==2     |
+| !=       | 2 valores son diferentes=              | 1 != 0, 1 != 2     |
+| <        | Lado izquiero es menor que el derecho? | 1 < 2, 2 < 1       |
+| >        | Lado izquierdo es mayor al derecho?    | 1 > 2, 2 > 1       |
+| ++       | Concatenar 2 listas                    | [1,2] ++ [3,4]     |
+| <>       | Concatenar 2 strings                   | "Holi" <> "Woli"   |
+
+* Operador Match "="
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+* patron = data
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+** Operador Match
+#+BEGIN_SRC elixir
+iex> nombre = "Albert"
+"Albert"
+iex> edad  = 25
+25
+#+END_SRC
+** Operador Match
+Las variables pueden reenlazarse.
+
+Ejemplo:
+#+BEGIN_SRC elixir
+iex> nombre = "Albert"
+"Albert"
+iex> nombre = "Amiguito"
+"Amiguito"
+#+END_SRC
+
+** Operador Match
+El operador match es en realidad una afirmación que nosotros hacemos y que elixir tratara de hacer verdad enlazando valores a las variables que participen.
+
+Ejemplo:
+#+BEGIN_SRC elixir
+iex> {nombre, edad} = {"Albert", 25}
+{"Albert", 25}
+iex> nombre
+"Albert"
+iex> edad
+25
+#+END_SRC
+
+** Operador Match
+Variables solo pueden enlazar una vez por match.
+
+Ejemplo:
+#+BEGIN_SRC elixir
+#Contrajemplo
+iex> {edad, edad} = {24, 25}
+(MatchError) no match of right hand side value: {24, 25}
+#+END_SRC
+
+** Operador Match
+Usamos =_= para ignorar elementos en un match.
+
+Ejemplo:
+#+BEGIN_SRC elixir
+iex> {nombre, _} = {"Albert", 25}
+{"Albert", 25}
+iex> nombre
+"Albert"
+#Tambien puedo usar la siguiente forma solo por un tema de doocumentación
+iex> {nombre, _edad} = {"Albert", 25}
+{"Albert", 25}
+iex> edad
+warning: ...........
+#+END_SRC
+
+** Operador Match
+Parte del contenido del patron puede contener información que debera ser matcheada en el lado de la data.
+
+Ejemplo:
+#+BEGIN_SRC elixir
+iex> {"Albert", edad} = {"Albert", 25}
+{"Albert", 25}
+iex> edad
+25
+
+iex> {"Amiguito", edad} = {"Albert", 25}
+(MatchError) no match of right hand side value:
+#+END_SRC
+
+** Operador Match
+Usamos =^= cuando queremos usar el valor de las variables en el lado del patron.
+
+Ejemplo:
+#+BEGIN_SRC elixir
+iex> nombre = "Albert"
+"Albert"
+iex> {^nombre, edad} = {"Albert", 25}
+{"Albert", 25}
+iex> edad
+25
+#+END_SRC
+
+** Operador Match
+Todos los tipos de datos vistos hasta hora pueden ser matcheados.
+
+Ejemplo:
+#+BEGIN_SRC elixir
+#Mapas
+iex> %{nombre: nombre, edad: edad} = %{nombre: "Albert", edad: 25}
+#Estructuras
+iex> {nombre: nombre} = %{nombre: "Albert", edad: 25}
+{"Albert", 25}
+#Binarios
+iex> "Holi " <> palabra = "Holi Woli"
+"Hola Mundo"
+iex> palabra
+mundo
+#+END_SRC
+
+
+* Gracias ˊ・ω・ˋ
+:PROPERTIES:
+:SLIDE: thank-you-slide segue
+:ASIDE: right
+:ARTICLE: flexbox vleft auto-fadein
+:END:
+
+* Footnotes
+
+[fn:1][[https://hexdocs.pm/elixir/operators.html]]

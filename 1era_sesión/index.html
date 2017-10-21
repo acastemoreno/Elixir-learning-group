@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- 2017-10-21 sáb 15:32 -->
+<meta  charset="utf-8" />
+<meta  htto-equiv="X-UA-Compatible" content="chrome=1" />
+<meta  name="generator" content="Org-mode with org-ioslide" />
+<meta  name="author" content="Albert Castellano Moreno" />
+
+
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--This one seems to work all the time, but really small on ipad-->
+<!--<meta name="viewport" content="initial-scale=0.4">-->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" media="all" href="theme/css/default.css" />
+<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css" />
+<link rel="stylesheet" media="all" href="theme/css/small-icon.css" />
+<base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+<script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+
+   <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+<script src="js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML,local/local" type="text/javascript"></script>
+</head>
+<body style="opacity: 0">
+<slides class="layout-widescreen">
+<slide class="title-slide segue nobackground">
+       <aside class="gdbar"><img src="images/elixir.png"></aside>
+       <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+       <hgroup class="auto-fadein">
+         <h1 data-config-title><!-- populated from slide_config.json --></h1>
+         <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+         <p data-config-presenter><!-- populated from slide_config.json --></p>
+       </hgroup>
+    </slide>
+  
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgef24527" class="outline-3">
+<h3 id="orgef24527">Amiguito. Quién eres?</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Formación:
+</p>
+<ul>
+<li>Ingenierío Mecánico - Universidad Nacional de Ingeniería.</li>
+</ul>
+<p>
+Experiencia Laboral:
+</p>
+<ul>
+<li>Ingeniero de Proyectos en Control System Integration</li>
+<li>Elixirist (Alquimista) ♥</li>
+</ul>
+
+<p>
+Pueden llamarme <b>Amiguito</b>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgbace940" class="outline-3">
+<h3 id="orgbace940">Programación: Autodidacta</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/lenguajes.png" alt="lenguajes.png" width="650px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgcb1dad1" class="outline-3">
+<h3 id="orgcb1dad1">Objetivos:</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul class="build">
+<li>Cambiar nuestro paradigma sobre programación.</li>
+<li>Aprender conceptos sobre programación funcional.</li>
+<li>Sentar una base solida sobre elixir (para posteriormente realizar proyectos).</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org752b5d4" class="outline-3">
+<h3 id="org752b5d4">Importante:</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul class="build">
+<li>Cambiar a un nuevo paradigma es muy diferente de simplemente cambiar entre idiomas. Tienes que pensar diferente, o te meterás en problemas.</li>
+<li>Reset your mind.</li>
+<li>Aunque a futuro no uses a elixir como tu main language para programar (en nuestro mercado local no se necesita, pero si a nivel internacional); podras crecer como desarrolladora.</li>
+<li>Seguro que podras conseguir más trabajo con otros lenguajes, pero no mejores trabajos.</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-org3998986" class="outline-2">
+<h2 id="org3998986">Thinking Functionally</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org4d52c13" class="outline-3">
+<h3 id="org4d52c13">Nuestro paradigma sobre programación está cambiando</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Las reglas que rigen la programación diaria típica estan cambiando. Eso no sucede a menudo. Cuando lo hace, <b>algo importante esta pasando</b>.
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class="fill white nobackground" style="background-image: url(images/asustado.jpg)">
+<hgroup class="">
+       <h2 class="white "><div id="outline-container-orgdfeffc9" class="outline-3">
+<h3 id="orgdfeffc9">:O</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org348e6e9" class="outline-3">
+<h3 id="org348e6e9">¿Por qué funcional?</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul class="build fade">
+<li>Un paradigma de programación consiste en las reglas y principios de diseño de software.</li>
+<li>Algo en cómo estamos construyendo un software no cumple con las demandas modernas.</li>
+<li>Necesitamos procesar múltiples tareas y enorme cantidad de datos de forma rápida y confiable.</li>
+<li>La CPU no se está acelerando, no podemos simplemente escribir código y esperar que un nuevo CPU nos favoresca.</li>
+<li>En cambio, tenemos múltiples núcleos o incluso máquinas.</li>
+<li>Necesitamos escribir un código que aproveche la simultaneidad y el paralelismo.</li>
+<li>Desafortunadamente, cuando trabajas en lenguajes imperativos convencionales y lenguajes orientados a objetos, es difícil.</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org40d1ce7" class="outline-3">
+<h3 id="org40d1ce7">Limitaciones de lenguajes convencionales</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/multithreaded_programming.jpg" alt="multithreaded_programming.jpg" width="700px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgb8c3e50" class="outline-2">
+<h2 id="orgb8c3e50">Limitaciones de lenguajes convencionales</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/cpu0.jpg" alt="cpu0.jpg" width="340px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org4139c19" class="outline-3">
+<h3 id="org4139c19">Ejemplo (Memoria compartida)</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="ruby">
+list = [1, 2, 3, 4]
+list.pop
+# =&gt; 4
+list.push(1)
+# =&gt; [1, 2, 3, 1]
+puts list.inspect
+# =&gt; [1, 2, 3, 1]</pre>
+
+</div>
+<p>
+¿Qué podría pasar si, en medio de una operación, el valor cambia debido a otro proceso?
+</p>
+
+<p>
+<b>Es difícil de predecir. La programación funcional ofrece una mejor alternativa</b>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-org64d6942" class="outline-2">
+<h2 id="org64d6942">Programación Funcional</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org3090173" class="outline-2">
+<h2 id="org3090173">Vista Rápida</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>La programación funcional es un paradigma de programación en el que las funciones son los componentes básicos, todos los valores son inmutables y el código es declarativo.</li>
+<li>Cuando buscas programación funcional, aparecen muchos términos inusuales. Es como si estuviera hecho para matemáticos, no para programadores.</li>
+</ul>
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orga79e99f" class="outline-3">
+<h3 id="orga79e99f"></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/haskell.png" alt="haskell.png" width="700" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org6527d23" class="outline-3">
+<h3 id="org6527d23">Elixir viene a rescatarnos</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>La sintaxis simple y pragmática de Elixir lo hace accesible para todos, incluso para aquellos que no han aprendido el paradigma funcional. Elixir es un lenguaje robusto y listo para producción, y vive en el ecosistema de Erlang, que existe desde hace 30 años y ofrece software con confiabilidad de nueve segundos.</li>
+<li>Con un lenguaje funcional como Elixir, tendrás un mejor uso del CPU , escribiendo un código más corto y más explícito.</li>
+<li>Cuando aplicas el paradigma funcional en un lenguaje funcional, escribes un código que vive armoniosamente con el lenguaje.</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-org6ea568d" class="outline-2">
+<h2 id="org6ea568d">Let's start</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org0376a75" class="outline-3">
+<h3 id="org0376a75">Representando Valores</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>Valores son cualquier cosa que pueda presentar datos en elixir.</li>
+<li>Abre tu consola y ejecuta <code>iex</code></li>
+</ul>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; 10
+10 #Integer Type
+iex&gt; "Holi Woli"
+"Holi Woli" #String Type</pre>
+
+</div>
+<p>
+<code>Literals</code> son valores que los humanos podemos entender facilmente.
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org013c197" class="outline-3">
+<h3 id="org013c197">Asi que los valores tienen <code>Types</code>.</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="smaller" id="text-">
+<p>
+Si, la siguiente tabla muestra los <code>types</code> más comunes
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Type</th>
+<th scope="col" class="left">Usado para</th>
+<th scope="col" class="left">Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">string</td>
+<td class="left">Textos</td>
+<td class="left">"Hello World", "Holi Woli"</td>
+</tr>
+
+<tr>
+<td class="left">integer</td>
+<td class="left">Numeros Enteros</td>
+<td class="left">42, 100, 1000, -34</td>
+</tr>
+
+<tr>
+<td class="left">float</td>
+<td class="left">Numeros Reales</td>
+<td class="left">10.8e10, 0.7654, -1.32</td>
+</tr>
+
+<tr>
+<td class="left">boolean</td>
+<td class="left">Expresiones Logicas</td>
+<td class="left">true, false</td>
+</tr>
+
+<tr>
+<td class="left">atom</td>
+<td class="left">Identificadores</td>
+<td class="left">:ok, :error, :exit</td>
+</tr>
+
+<tr>
+<td class="left">tuple</td>
+<td class="left">Colección de tamaño conocido</td>
+<td class="left">{:ok, 1.32}, {:metros, 50}, {1,2,3}</td>
+</tr>
+
+<tr>
+<td class="left">list</td>
+<td class="left">Colección de tamaño desconocido</td>
+<td class="left">[1,2,3,4], ["juanito, pepito"]</td>
+</tr>
+
+<tr>
+<td class="left">map</td>
+<td class="left">Buscar un valor dentro de un diccionario mediante un key</td>
+<td class="left">%{nombre: "Albert", apellidos: "Castellano Moreno", alias: "Amiguito"}</td>
+</tr>
+
+<tr>
+<td class="left">nil</td>
+<td class="left">Representa ausencia de calor</td>
+<td class="left">nil</td>
+</tr>
+</tbody>
+</table>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org2838e62" class="outline-3">
+<h3 id="org2838e62">Ejecutando codigo</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Elixir puede ejecutar y generar un resultado de  <code>expresiones</code>.
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; 42
+42
+iex&gt; 1+1
+2
+iex&gt; (2+2)*3
+12
+iex&gt; 2+2*3</pre>
+
+</div>
+<p>
+Cuando usamos diferentes <code>operadores</code>, ellos tienen un orden en el cual seran ejecutados, esto se llama <code>precedencia</code><sup>1</sup>.
+</p>
+
+<footer class="source">
+<p class="footpara">1. 
+<a href="https://hexdocs.pm/elixir/operators.html">https://hexdocs.pm/elixir/operators.html</a>
+</p>
+</footer>
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orged17c46" class="outline-3">
+<h3 id="orged17c46">Ejecutando codigo</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; "Hello World!" + 5
+(ArithmeticError) bad argument in arithmetic expression ......
+iex&gt; 37 + 3.7
+40.7</pre>
+
+</div>
+<p>
+La ultima expresión no resulta en error debido a que la suma se da entre valores con el type <code>number</code> que consiste en la union de <code>integer</code> y <code>float</code>
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orga2685c8" class="outline-3">
+<h3 id="orga2685c8">Operadores más usadas</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="smaller" id="text-">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Operador</th>
+<th scope="col" class="left">Usado para</th>
+<th scope="col" class="left">Ejemplos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">+</td>
+<td class="left">Sumar numeros</td>
+<td class="left">10 + 5, 3.7 + 8.1</td>
+</tr>
+
+<tr>
+<td class="left">-</td>
+<td class="left">Restar numeros</td>
+<td class="left">10 - 25, 9.7 - 8.1</td>
+</tr>
+
+<tr>
+<td class="left">*</td>
+<td class="left">Multiplicar numero</td>
+<td class="left">10 * 2, 1.5*3</td>
+</tr>
+
+<tr>
+<td class="left">==</td>
+<td class="left">2 valores son iguales?</td>
+<td class="left">1 == 1.0, 1==2</td>
+</tr>
+
+<tr>
+<td class="left">!=</td>
+<td class="left">2 valores son diferentes=</td>
+<td class="left">1 != 0, 1 != 2</td>
+</tr>
+
+<tr>
+<td class="left">&lt;</td>
+<td class="left">Lado izquiero es menor que el derecho?</td>
+<td class="left">1 &lt; 2, 2 &lt; 1</td>
+</tr>
+
+<tr>
+<td class="left">&gt;</td>
+<td class="left">Lado izquierdo es mayor al derecho?</td>
+<td class="left">1 &gt; 2, 2 &gt; 1</td>
+</tr>
+
+<tr>
+<td class="left">++</td>
+<td class="left">Concatenar 2 listas</td>
+<td class="left">[1,2] ++ [3,4]</td>
+</tr>
+
+<tr>
+<td class="left">&lt;&gt;</td>
+<td class="left">Concatenar 2 strings</td>
+<td class="left">"Holi" &lt;&gt; "Woli"</td>
+</tr>
+</tbody>
+</table>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-org1fb36e8" class="outline-2">
+<h2 id="org1fb36e8">Operador Match "="</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-org0aee189" class="outline-2">
+<h2 id="org0aee189">patron = data</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org2f4d473" class="outline-3">
+<h3 id="org2f4d473">Operador Match</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; nombre = "Albert"
+"Albert"
+iex&gt; edad  = 25
+25</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org3f0fc9c" class="outline-3">
+<h3 id="org3f0fc9c">Operador Match</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Las variables pueden reenlazarse.
+</p>
+
+<p>
+Ejemplo:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; nombre = "Albert"
+"Albert"
+iex&gt; nombre = "Amiguito"
+"Amiguito"</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgd7add12" class="outline-3">
+<h3 id="orgd7add12">Operador Match</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+El operador match es en realidad una afirmación que nosotros hacemos y que elixir tratara de hacer verdad enlazando valores a las variables que participen.
+</p>
+
+<p>
+Ejemplo:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; {nombre, edad} = {"Albert", 25}
+{"Albert", 25}
+iex&gt; nombre
+"Albert"
+iex&gt; edad
+25</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org58117f6" class="outline-3">
+<h3 id="org58117f6">Operador Match</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Variables solo pueden enlazar una vez por match.
+</p>
+
+<p>
+Ejemplo:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+#Contrajemplo
+iex&gt; {edad, edad} = {24, 25}
+(MatchError) no match of right hand side value: {24, 25}</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org2a1bca0" class="outline-3">
+<h3 id="org2a1bca0">Operador Match</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Usamos <code>_</code> para ignorar elementos en un match.
+</p>
+
+<p>
+Ejemplo:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; {nombre, _} = {"Albert", 25}
+{"Albert", 25}
+iex&gt; nombre
+"Albert"
+#Tambien puedo usar la siguiente forma solo por un tema de doocumentación
+iex&gt; {nombre, _edad} = {"Albert", 25}
+{"Albert", 25}
+iex&gt; edad
+warning: ...........</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org7a60c40" class="outline-3">
+<h3 id="org7a60c40">Operador Match</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Parte del contenido del patron puede contener información que debera ser matcheada en el lado de la data.
+</p>
+
+<p>
+Ejemplo:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; {"Albert", edad} = {"Albert", 25}
+{"Albert", 25}
+iex&gt; edad
+25
+
+iex&gt; {"Amiguito", edad} = {"Albert", 25}
+(MatchError) no match of right hand side value:</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org29e469e" class="outline-3">
+<h3 id="org29e469e">Operador Match</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Usamos <code>^</code> cuando queremos usar el valor de las variables en el lado del patron.
+</p>
+
+<p>
+Ejemplo:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; nombre = "Albert"
+"Albert"
+iex&gt; {^nombre, edad} = {"Albert", 25}
+{"Albert", 25}
+iex&gt; edad
+25</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org5d21a62" class="outline-3">
+<h3 id="org5d21a62">Operador Match</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Todos los tipos de datos vistos hasta hora pueden ser matcheados.
+</p>
+
+<p>
+Ejemplo:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+#Mapas
+iex&gt; %{nombre: nombre, edad: edad} = %{nombre: "Albert", edad: 25}
+#Estructuras
+iex&gt; {nombre: nombre} = %{nombre: "Albert", edad: 25}
+{"Albert", 25}
+#Binarios
+iex&gt; "Holi " &lt;&gt; palabra = "Holi Woli"
+"Hola Mundo"
+iex&gt; palabra
+mundo</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+
+</slide>
+<slide id="sec-" class=" thank-you-slide segue nobackground" style="background-image: url(nil)">
+<aside class="gdbar right"><img src="images/elixir.png"></aside><article class="flexbox vleft auto-fadein" id="text-">
+<h2>
+  <p>Gracias ˊ・ω・ˋ</p>
+</h2>
+<br>
+<p class="auto-fadein" data-config-contact>
+</p>
+</article>
+
+</slide>
+<slide class="backdrop"></slide>
+</slides> 
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body> 
+
+</html>
