@@ -409,7 +409,91 @@ iex> [1, 2, 3, 4]
 - Insertando elementos puede ser lento
 - Leer la lista entera puede ser lento
 
+** Recursion
+#+BEGIN_QUOTE
+Recurrencia, recursión o recursividad es la forma en la cual se especifica un proceso basado en su propia definición.
+  -- Wikipedia
+#+END_QUOTE
+#+BEGIN_QUOTE
+De hecho, recursión es una de las ideas centrales de ciencia de computación.Resolver un problema mediante recursión significa que la solución depende de las soluciones de pequeñas instancias del mismo problema.
+ -- Recursión (ciencias de computación) - Wikipedia
+#+END_QUOTE
+** Utilidad (Mediante ejemplo)
+#+BEGIN_SRC elixir
+#suma.ex
+defmodule Suma do
+  def hasta(0), do: 0
+  def hasta(n), do: n + hasta(n - 1)
+end
 
+iex>Suma.hasta(10)
+=10+hasta(9)
+=10+(9+hasta(8))
+=10+(9+(8+hasta(7)))
+=10+(9+(8+(7+(6+(5+(4+(3+(2+(1+(0))))))))))
+#+END_SRC
+Puede causar algo llamado *Stackoverflow*
+** Recordando ejemplo
+#+BEGIN_SRC elixir
+#factorial.exs
+defmodule Factorial do
+  def de(0), do: 1
+  def de(n), do: n * de(n-1)
+end
+#+END_SRC
+Si calculamos el factorial de =1_000_000=. El consumo de memoria puede ocasionar el colapso total de nuestro sistema.
+** Arreglemos el factorial
+Para evitar stackoverflow, elixir nos aconseja que lo ultimo que hagamos en una función *recursiva* es ejecutar una función.
+Pero en nuestro caso necesitamos que el factorial se llame a si mismo al final de su ejecución.
+#+BEGIN_SRC elixir
+defmodule Factorial do
+  def de(0), do: 1
+  def de(n), do: de(n-1)
+end
+# Ahora necesitamos ir acumulando resultados parciales cada vez que n se reduzca
+# (esto nos obliga a crear un nuevo parametro que sirva como acumulador)
+#+END_SRC
+** 
+#+BEGIN_SRC elixir
+defmodule Factorial do
+  def de(0,acc), do: 1
+  def de(n,acc), do: de(n-1,acc)
+end
+#+END_SRC
+
+#+BEGIN_SRC elixir
+# Agregamos la multiplicación  y al final de nuestro
+defmodule Factorial do
+  def de(0,acc), do: acc
+  def de(n,acc), do: de(n-1, acc*n)
+end
+iex> Factorial(1,1) #1
+iex> Factorial(2,1) #2
+#+END_SRC
+
+** 
+#+BEGIN_SRC elixir
+# cambiamos la funcion para que sea privada y sea utilizada por otra función
+defmodule Factorial do
+  def de(n), do: p_de(n,1)
+  defp p_de(0, acc), do: acc
+  defp p_de(n, acc), do: de(n-1, acc*n)
+end
+#+END_SRC
+
+** Más ejemplos
+#+BEGIN_SRC elixir
+iex> MiLista.suma([1,2,3,4,5,6])
+21
+iex> MiLista.longitud([1,2,3,4])
+4
+iex> MiLista.map([1,2,3,4,5], &(&1*&1))
+[1,4,9,16,25]
+iex> MiLista.fibonacci([1,1], 7)
+[1,1,2,3,5,8,13]
+iex> MiLista.tribonacci([1,1,1], 7)
+[1,1,1,3,5,9,17]
+#+END_SRC
 
 * Gracias ˊ・ω・ˋ
 :PROPERTIES:
