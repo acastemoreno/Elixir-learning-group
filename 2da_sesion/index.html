@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- 2017-10-28 sáb 15:31 -->
+<meta  charset="utf-8" />
+<meta  htto-equiv="X-UA-Compatible" content="chrome=1" />
+<meta  name="generator" content="Org-mode with org-ioslide" />
+<meta  name="author" content="Albert Castellano Moreno" />
+
+
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--This one seems to work all the time, but really small on ipad-->
+<!--<meta name="viewport" content="initial-scale=0.4">-->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" media="all" href="theme/css/default.css" />
+<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css" />
+<link rel="stylesheet" media="all" href="theme/css/small-icon.css" />
+<base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+<script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+
+   <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+<script src="js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML,local/local" type="text/javascript"></script>
+</head>
+<body style="opacity: 0">
+<slides class="layout-widescreen">
+<slide class="title-slide segue nobackground">
+       <aside class="gdbar"><img src="images/elixir.png"></aside>
+       <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+       <hgroup class="auto-fadein">
+         <h1 data-config-title><!-- populated from slide_config.json --></h1>
+         <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+         <p data-config-presenter><!-- populated from slide_config.json --></p>
+       </hgroup>
+    </slide>
+  
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-org1f4a6d2" class="outline-2">
+<h2 id="org1f4a6d2">Funciones anonimas</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgea99c76" class="outline-3">
+<h3 id="orgea99c76">Creando funciones anonimas</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Las funciones anonimas tienen la siguiente forma: <code>fn(&lt;parametro1&gt;, &lt;parametro2&gt;, ....) -&gt; &lt;ejecucion y retorno&gt; end</code>
+</p>
+
+<p>
+Crearemos funciones en IEx y las guardaremos en una variable para posteriormente utilizarlas:
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; velocidad = fn (distancia) -&gt; :math.sqrt(2 * 9.81 * distancia) end
+#Function&lt;6.52032458/1 in :erl_eval.expr/5&gt;
+## El retorno nos sirve para corroborrar que hemos creado una funcion y
+## no resulto en error.
+iex&gt; sum = fn (a, b) -&gt; a + b end
+#Function&lt;12.17052888 in :erl_eval.expr/5&gt;
+iex&gt; sum.(1, 2)
+3</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org3b15158" class="outline-3">
+<h3 id="org3b15158">Funciones anonimas creadas en multiples Lineas</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Ahora podemos separar en piezas nuestras funciones dentro de multiples lineas, esto hace que sea más legible. IEx mantiene la linea abierta hasta que tipees <code>end</code>. El ejemplo anterior de esta manera:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+##En este caso obviamos englobar en parentesis
+##los parametros porque solo existe uno solo.
+iex&gt; velocidad = fn
+...&gt; distancia -&gt; :math.sqrt(2 * 9.81 * distancia)
+...&gt; end
+#Function&lt;6.52032458/1 in :erl_eval.expr/5&gt;
+iex&gt; velocidad.(10)
+14.007141035914502</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org56f0c74" class="outline-3">
+<h3 id="org56f0c74">Funciones Anonimas y Pattern Matching</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Cada vez que evaluamos una funcion anonima, un patron se matchea con la data suministrada, de lo cual deriva en asignaciones, para que luego sean utilizadas. Esto significa que se puede hacer matcheos de mayor complejidad
+Ejemplos:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+##En este caso se esta pasando un solo parametro que es una tupla y se esta devolviendo otra tupla con el orden invertido.
+iex&gt; intercambio = fn
+...&gt; {primero, segundo} -&gt; {segundo, primero}
+...&gt; end
+#Function&lt;6.52032458/1 in :erl_eval.expr/5&gt;
+iex&gt; intercambio.({6, 8})
+{8, 6}</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org043d28e" class="outline-3">
+<h3 id="org043d28e">Una funcion anonima, multiples cuerpos</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Para el siguiente ejemplo, en mi carpeta creo un archivo <code>holiwoli.txt</code> que no es necesario que tenga contenido.
+</p>
+
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/holiwoli.png" alt="holiwoli.png" width="450px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org8918408" class="outline-3">
+<h3 id="org8918408"></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Ejecuto <code>iex</code> en la carpeta donde se ubica <code>holiwoli.txt</code> y ejecuto lo siguiente. Analizamos el uso de una funcion llamada <code>open</code>, dentro de la libreria <code>File</code>, que por defecto Elixir ya incorpora.
+</p>
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/file_open.png" alt="file_open.png" width="500px" />
+</p>
+</div>
+</article>
+<p>
+Al ejecutar la funcion, esta retorna una tupla, tal que su primer elemento es un atomo que representa el exito o fracaso de la operación, y el segundo es segun el primer termino, un identificador unico de proceso ó un mensaje de error.
+</p>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgfc5586c" class="outline-3">
+<h3 id="orgfc5586c"></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Ahora creamos una funcion anonima que procese ese resultado y dependiendo del caso realiza una accion u otra.
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; verificar_archivo = fn
+...&gt; {:ok, archivo} -&gt; "Leyendo archivo: #{IO.read(archivo, :line)}"
+...&gt; {_, error}  -&gt; "Error: #{:file.format_error(error)}"
+...&gt; end
+#Function&lt;6.52032458/1 in :erl_eval.expr/5&gt;</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org57c178c" class="outline-3">
+<h3 id="org57c178c"></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="smaller" id="text-">
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/verificar_archivo.png" alt="verificar_archivo.png" width="850px" />
+</p>
+</div>
+</article>
+<p>
+Lo que hace la función es verificar el primer primer patron que en este caso es <code>{:ok, archivo}</code>. Si consigue hacer el match <code>{:ok, archivo} = File.open(".......")</code> imprime el texto <code>Leyendo archivo: ........</code>, y si no matchea intentara hacer un nuevo match con <code>{_, error}</code> de la siguiente forma <code>{_, error} = File.open(".......")</code>, si logra hacer este ultimo match se imprimira el texto <code>Error: ..........</code>
+</p>
+
+<p>
+Significa que importa el orden de las <code>definiciones</code>.
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-org104b186" class="outline-2">
+<h2 id="org104b186">Shortcut &amp;</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgc7da086" class="outline-3">
+<h3 id="orgc7da086"></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="smaller" id="text-">
+<p>
+Hemos observador hasta el momento que para crear una funcion anonima es necesario definir 2 partes importantes:
+</p>
+<ul>
+<li>El patron</li>
+<li>El contenido que ejecuta</li>
+</ul>
+<p>
+Ahora, existe algo más practico que toma en concideracion el orden de los parametros que se estan tomando. Eso más practico es el uso de <code>&amp;</code> para definir funciones anonimas.
+</p>
+
+<p>
+Aqui un ejemplo en la forma como se utilizan.
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; doble = &amp;(&amp;1 * 2)
+#Function&lt;6.52032458/1 in :erl_eval.expr/5&gt;
+iex&gt; doble.(7)
+14</pre>
+
+</div>
+<p>
+<code>&amp;(...)</code> se refiere a la creacion de una funcion anonima. <code>&amp;1</code> representa el primer parametro  obtenido al evaluar la funcion. Entonces <code>&amp;(&amp;1 * 2)</code> es una funcion anonima de aridad 1 que toma su primer parametro (primer y unico parametro) y devuelve el doble.
+</p>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org5ac00e2" class="outline-3">
+<h3 id="org5ac00e2"></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+<code>&amp;(....)</code> tiene las siguientes variaciones:
+</p>
+<ul>
+<li><code>&amp;{....}</code>: Funcion anonima que crea una tupla como resultado</li>
+<li><code>&amp;[....]</code>: Funcion anonima que crea una lista como resultado</li>
+</ul>
+<p>
+Ejemplos:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; cociente_residuo = &amp;{ div(&amp;1,&amp;2), rem(&amp;1,&amp;2) }
+#Function&lt;6.52032458/1 in :erl_eval.expr/5&gt;
+iex&gt; cociente_residuo.(13, 5)
+{2, 3}
+iex&gt; lista = &amp;[&amp;1, &amp;1 * 2, &amp;1 * 3]
+#Function&lt;6.52032458/1 in :erl_eval.expr/5&gt;
+iex&gt; lista.(5)
+[5, 10, 15]</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org1860176" class="outline-3">
+<h3 id="org1860176">Usos de &amp;</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Sabemos que hace <code>&amp;(....)</code>, pero para que sirve?
+</p>
+
+<p>
+Sirve crear funciones anonimas como parametros de otras funciones:
+</p>
+
+<p>
+Ejemplos:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; Enum.map [1,2,3,4], &amp;(&amp;1 + 1)
+[2, 3, 4, 5]
+iex&gt; Enum.map [1,2,3,4], &amp;(&amp;1 * &amp;1)
+[1, 4, 9, 16]
+iex&gt; Enum.map [1,2,3,4], &amp;(&amp;1 &lt; 3)
+[true, true, false, false]
+iex&gt; Enum.filter [1,2,3,4], &amp;(&amp;1 &lt;= 3)</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orge69a634" class="outline-3">
+<h3 id="orge69a634">Ejercicios</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Crear funciones anonimas en sus 2 formas (fn, &amp;, eso si esto es posible) que den estos resultados:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; saludo.(%{nombre:"Albert", edad: 25})
+"Hola Albert, tienes 25 años"
+iex&gt; proceso.(1..40)
+[1,4,9,16,25] # Elementos al cuadrado y luego filtrados (solo menores iguales a 30)</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-org930a43f" class="outline-2">
+<h2 id="org930a43f">Modulos</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org36f028e" class="outline-3">
+<h3 id="org36f028e">Qué es un Modulo?</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Una vez que tu codigo crece, es una necesidad real estructuralo. Partes tu codigo en funciones con nombre y los organizas dentro de modulos.
+</p>
+
+<p>
+Los modulos te dan la habilidad de guardar, encapsular, compartir y manejar tu codigo de la manera más eficiente.
+</p>
+
+<p>
+Cada modulo tiene extension <code>.ex</code> ó <code>.exs</code> (<code>.ex</code> es para archivos que sera compilados y <code>.exs</code> son para crear scripts ó mejor dicho archivos que se interpretan en beam pero que no es necesario que se compilen).
+</p>
+
+<p>
+Nota: Nombres de Archivos que representen modulos respetan la regla del camello (CamelCase).
+</p>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org93360c9" class="outline-3">
+<h3 id="org93360c9">Creando nuestro primer modulo</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="smaller" id="text-">
+<p>
+Creamos el archivo <code>caida.exs</code> dentro de nuestra carpeta y con el editor de texto escribimos lo siguiente:
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+#Archivo: caida.exs
+defmodule Caida do
+  def velocidad(altura) do
+    :math.sqrt(2 * 9.81 * altura)
+  end
+end</pre>
+
+</div>
+<p>
+En el codigo escrito podemos ver que existe un modulo <code>Caida</code>, tal que engloba entre <code>do ...... end</code> a una funcion con nombre <code>velocidad</code>. Esta funcion <code>velocidad</code>, recibe un parametro <code>altura</code>, que al ser evaluada se matchea para luego ejecutarse el contenido entre <code>do ... end</code> que es <code>:math.sqrt(2 * 9.81 * altura)</code>
+</p>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org78bc28d" class="outline-3">
+<h3 id="org78bc28d">Cargando nuestro codigo en consola</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="smaller" id="text-">
+<p>
+Existen 2 formas de usar el codigo en archivos.
+</p>
+<ul>
+<li>Ejecutando <code>iex &lt;nombre de archivo&gt;</code> para luego ejecutarlo</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="cmd">
+$ iex caida.exs
+iex&gt; Caida.velocidad(100)
+44.294469180700204</pre>
+
+</div>
+<ul>
+<li>Estando en iex, ejecutamos <code>c &lt;"nombre de archivo"&gt;</code></li>
+</ul>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; c "caida.exs"
+[Caida]
+iex&gt; Caida.velocidad(100)
+44.294469180700204</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgab306a5" class="outline-3">
+<h3 id="orgab306a5">Patten Matching en funciones con nombre</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+En funciones anonimas teniamos la posibilidad de crear multiples cuerpos ó por decirlo de otra forma, que la funcion responda segun los parametros de entrada.
+</p>
+
+<p>
+Lo mismo tenemos en funciones con nombres.
+</p>
+
+<p>
+Ejemplo:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+#factorial.exs
+defmodule Factorial do
+  def de(0), do: 1
+  def de(n), do: n * de(n-1)
+end</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org5f553c8" class="outline-3">
+<h3 id="org5f553c8"></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+#factorial.exs
+defmodule Factorial do
+  def de(0), do: 1
+  def de(n), do: n * de(n-1)
+end</pre>
+
+</div>
+<p>
+Cuando el parametro es 0, el resultado es 1.
+</p>
+
+<p>
+Cuando el parametro no es 0, almacenamos el parametro de entrada en la variable <code>n</code> y luego evaluamos <code>n</code> por el factorial de <code>n</code> menos 1.
+</p>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org16e383f" class="outline-3">
+<h3 id="org16e383f"></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+#factorial1.exs
+iex&gt; c "factorial.exs"
+[Factorial]
+iex&gt; Factorial.de(3)
+6
+iex&gt; Factorial.de(7)
+5040
+iex&gt; Factorial.de(10)
+3628800</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org165b0df" class="outline-3">
+<h3 id="org165b0df">Otro ejemplo</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+#fibo.exs
+defmodule Fibonacci do
+  def de(0), do: 0
+
+  def de(1), do: 1
+
+  def de(n) do
+    de(n-1) + de(n-2)
+  end
+end</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgb209509" class="outline-3">
+<h3 id="orgb209509">Guard Clauses</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="smaller" id="text-">
+<p>
+<code>when</code> nos ayuda a verificar los tipos de las variables que hacen match.
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+#lista_numero.exs
+defmodule ListaNumero do
+  def que_es(x) when is_number(x) do
+    "#{x} es un numero"
+  end
+  def que_es(x) when is_list(x) do
+    "#{inspect(x)} es una lista"
+  end
+end</pre>
+
+</div>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; c "lista_numero.exs"
+[ListaNumero]
+iex&gt; ListaNumero.que_es(5)
+"5 es un numero"
+iex&gt; ListaNumero.que_es([5])
+"[5] es una lista"</pre>
+
+</div>
+<p>
+LIMITACIONES: Solo estan permitidas estas <a href="https://hexdocs.pm/elixir/guards.html#content">Guardias</a> dentro de <code>when</code>. <a href="https://hexdocs.pm/elixir/guards.html#defining-custom-guard-expressions">O quizas no exista limitación</a>.
+</p>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org4144296" class="outline-3">
+<h3 id="org4144296">Ejercicio</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; fizzbuzz(15) #Multiplo de 5 y 3
+"Fizzbuzz"
+iex&gt; fizzbuzz(6) #Multiplo de 3
+"Fizz"
+iex&gt; fizzbuzz(10) #MUltiplo de 5
+"Buzz"
+iex&gt; fizbuzz("Holi")
+"Qué paso amiguito?"</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orga1dfeb7" class="outline-2">
+<h2 id="orga1dfeb7">The amazing Pipe Operator</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org5790325" class="outline-3">
+<h3 id="org5790325">Pipe Operator |&gt;</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Que pasa si queremos elevar al cuadrado los elementos de una lista para luego filtrar a los que sean menores a 40. Tendriamos que usar la siguiente funcion:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; lista = 1..10
+1..10
+iex&gt; cuadrado = Enum.map(lista, &amp;(&amp;1 * &amp;1))
+[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+iex&gt; filtrado = Enum.filter(cuadrado, &amp;(&amp;1 &lt; 40))
+[1, 4, 9, 16, 25, 36]</pre>
+
+</div>
+<p>
+Entendemos este codigo, pero almacenamos muchas variables temporales (codigo poco eficiente).
+</p>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org80f6caf" class="outline-3">
+<h3 id="org80f6caf">Pipe Operator |&gt;</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Ahora, si no queremos almacenar variables temporales podemos hacer lo siguiente:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; filtrado = Enum.filter(Enum.map(1..10, &amp;(&amp;1 * &amp;1)), &amp;(&amp;1 &lt; 40))
+[1, 4, 9, 16, 25, 36]
+## Lo siento, por hacerles ver algo tan feo.</pre>
+
+</div>
+<p>
+Funciona, pero es dificil de leer y escalar, facilmente puede ocasionar errores. No es elegante.
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org84e7122" class="outline-2">
+<h2 id="org84e7122"></h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Muchos lenguajes nos obligan a tomar una decision sobre cual usar. Ser poco productivo pero hacer codigo eficiente ó ser productivo pero tu codigo es ineficiente.
+calma.jpg
+</p>
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/calma.jpg" alt="calma.jpg" width="600px" />
+</p>
+</div>
+</article>
+
+
+</article>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org40caadb" class="outline-3">
+<h3 id="org40caadb"></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Siganme los buenos.
+</p>
+
+<p>
+Una solucion elegante es pensar en funciones como transformaciones de información. Tal que el primer parametro de una funcion es el elemento a transformar, y los demas parametros son configuraciones a la transformación que se da.
+</p>
+
+<p>
+Resumiendo en una sola linea. En ves de usar f(val,a,b), usamos val |&gt; f(a,b). 
+</p>
+
+<p>
+Aplicando a nuestro ejemplo.
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; resultado = 1..10 |&gt; Enum.map(&amp;(&amp;1*&amp;1)) |&gt; Enum.filter(&amp;(&amp;1 &lt; 40))
+[1, 4, 9, 16, 25, 36]</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org7a49967" class="outline-3">
+<h3 id="org7a49967"></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/mi_astucia.jpg" alt="mi_astucia.jpg" width="450px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-orgb8a3f9d" class="outline-2">
+<h2 id="orgb8a3f9d">Recursión</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgde4e1fa" class="outline-3">
+<h3 id="orgde4e1fa">Implementación de Listas (Necesario tener claro como funcionan las listas)</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Las listas en Elixir pueden ser vacias ó pares inmutables <code>head/tail</code> 
+</p>
+
+<p>
+donde el <code>head</code> contiene un valor y el <code>tail</code> es en si misma una lista
+</p>
+
+<p>
+Ejemplos:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; [ head | tail ] = [ 1, 2, 3 ] # =&gt; [1, 2, 3]
+iex&gt; head 
+1
+iex&gt; tail 
+[2, 3]</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org6288f29" class="outline-3">
+<h3 id="org6288f29">Prepending en listas es <code>Rapido</code></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; list1 = [1, 2, 3]
+iex&gt; list2 = [0 | list1] </pre>
+
+</div>
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/prepending.png" alt="prepending.png" width="700px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org01f45ad" class="outline-3">
+<h3 id="org01f45ad">Appending en listas es <code>Lento</code></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; list1 = [1, 2, 3]
+iex&gt; list2 = list1 ++ [4] </pre>
+
+</div>
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/appending.png" alt="appending.png" width="700px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orga87ed29" class="outline-3">
+<h3 id="orga87ed29">Insertar elementos es <code>Lento</code></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; list1 = [1, 3, 4]
+iex&gt; list2 = List.insert_at(list1, 1, 2) # insertando 2 en la segunda posicion
+iex&gt; [1, 2, 3, 4]</pre>
+
+</div>
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/insert_list.png" alt="insert_list.png" width="700px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org4a488d6" class="outline-3">
+<h3 id="org4a488d6">Implementación de Listas</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>Elixir son pares head/tail</li>
+<li>Inmutabilidad hacen que sean eficientes en memoria</li>
+<li>Prepending es RAPIDO</li>
+<li>Appending es LENTO</li>
+<li>Insertando elementos puede ser lento</li>
+<li>Leer la lista entera puede ser lento</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+
+
+</slide>
+<slide id="sec-" class=" thank-you-slide segue nobackground" style="background-image: url(nil)">
+<aside class="gdbar right"><img src="images/elixir.png"></aside><article class="flexbox vleft auto-fadein" id="text-">
+<h2>
+  <p>Gracias ˊ・ω・ˋ</p>
+</h2>
+<br>
+<p class="auto-fadein" data-config-contact>
+</p>
+</article>
+
+</slide>
+<slide class="backdrop"></slide>
+</slides> 
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body> 
+
+</html>

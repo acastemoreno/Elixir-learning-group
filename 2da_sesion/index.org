@@ -1,0 +1,419 @@
+#+TITLE: Programación funcional con Elixir
+#+SUBTITLE: Elixir Learning Group - WiT Perú - 2da Sesión
+#+DATE: 2017/10/21（Sabado）4:00pm
+#+AUTHOR: Albert Castellano Moreno
+#+EMAIL: acastemoreno@gmail.com
+#+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
+#+OPTIONS: e:t email:nil f:t inline:t num:nil p:nil pri:nil stat:t
+#+OPTIONS: tags:t tasks:t tex:t timestamp:t toc:nil todo:t |:t
+#+CREATOR: Emacs 25.2.1
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: es
+#+SELECT_TAGS: export
+
+#+GITHUB: http://github.com/acastemoreno
+
+#+FAVICON: images/elixir.png
+#+ICON: images/elixir.png
+
+* Funciones anonimas
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+** Creando funciones anonimas
+Las funciones anonimas tienen la siguiente forma: =fn(<parametro1>, <parametro2>, ....) -> <ejecucion y retorno> end=
+
+Crearemos funciones en IEx y las guardaremos en una variable para posteriormente utilizarlas:
+
+#+BEGIN_SRC elixir
+iex> velocidad = fn (distancia) -> :math.sqrt(2 * 9.81 * distancia) end
+#Function<6.52032458/1 in :erl_eval.expr/5>
+## El retorno nos sirve para corroborrar que hemos creado una funcion y
+## no resulto en error.
+iex> sum = fn (a, b) -> a + b end
+#Function<12.17052888 in :erl_eval.expr/5>
+iex> sum.(1, 2)
+3
+#+END_SRC
+
+** Funciones anonimas creadas en multiples Lineas
+Ahora podemos separar en piezas nuestras funciones dentro de multiples lineas, esto hace que sea más legible. IEx mantiene la linea abierta hasta que tipees =end=. El ejemplo anterior de esta manera:
+#+BEGIN_SRC elixir
+##En este caso obviamos englobar en parentesis
+##los parametros porque solo existe uno solo.
+iex> velocidad = fn
+...> distancia -> :math.sqrt(2 * 9.81 * distancia)
+...> end
+#Function<6.52032458/1 in :erl_eval.expr/5>
+iex> velocidad.(10)
+14.007141035914502
+#+END_SRC
+** Funciones Anonimas y Pattern Matching
+Cada vez que evaluamos una funcion anonima, un patron se matchea con la data suministrada, de lo cual deriva en asignaciones, para que luego sean utilizadas. Esto significa que se puede hacer matcheos de mayor complejidad
+Ejemplos:
+#+BEGIN_SRC elixir
+##En este caso se esta pasando un solo parametro que es una tupla y se esta devolviendo otra tupla con el orden invertido.
+iex> intercambio = fn
+...> {primero, segundo} -> {segundo, primero}
+...> end
+#Function<6.52032458/1 in :erl_eval.expr/5>
+iex> intercambio.({6, 8})
+{8, 6}
+#+END_SRC
+** Una funcion anonima, multiples cuerpos
+Para el siguiente ejemplo, en mi carpeta creo un archivo =holiwoli.txt= que no es necesario que tenga contenido.
+
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 450px
+[[file:images/holiwoli.png]]
+#+END_CENTER
+** 
+Ejecuto =iex= en la carpeta donde se ubica =holiwoli.txt= y ejecuto lo siguiente. Analizamos el uso de una funcion llamada =open=, dentro de la libreria =File=, que por defecto Elixir ya incorpora.
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 500px
+[[file:images/file_open.png]]
+#+END_CENTER
+Al ejecutar la funcion, esta retorna una tupla, tal que su primer elemento es un atomo que representa el exito o fracaso de la operación, y el segundo es segun el primer termino, un identificador unico de proceso ó un mensaje de error.
+** 
+Ahora creamos una funcion anonima que procese ese resultado y dependiendo del caso realiza una accion u otra.
+#+BEGIN_SRC elixir
+iex> verificar_archivo = fn
+...> {:ok, archivo} -> "Leyendo archivo: #{IO.read(archivo, :line)}"
+...> {_, error}  -> "Error: #{:file.format_error(error)}"
+...> end
+#Function<6.52032458/1 in :erl_eval.expr/5>
+#+END_SRC
+** 
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 850px
+[[file:images/verificar_archivo.png]]
+#+END_CENTER
+Lo que hace la función es verificar el primer primer patron que en este caso es ={:ok, archivo}=. Si consigue hacer el match ={:ok, archivo} = File.open(".......")= imprime el texto =Leyendo archivo: ........=, y si no matchea intentara hacer un nuevo match con ={_, error}= de la siguiente forma ={_, error} = File.open(".......")=, si logra hacer este ultimo match se imprimira el texto =Error: ..........=
+
+Significa que importa el orden de las =definiciones=.
+
+* Shortcut &
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+** 
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+Hemos observador hasta el momento que para crear una funcion anonima es necesario definir 2 partes importantes:
+- El patron
+- El contenido que ejecuta
+Ahora, existe algo más practico que toma en concideracion el orden de los parametros que se estan tomando. Eso más practico es el uso de =&= para definir funciones anonimas.
+
+Aqui un ejemplo en la forma como se utilizan.
+#+BEGIN_SRC elixir
+iex> doble = &(&1 * 2)
+#Function<6.52032458/1 in :erl_eval.expr/5>
+iex> doble.(7)
+14
+#+END_SRC
+=&(...)= se refiere a la creacion de una funcion anonima. =&1= representa el primer parametro  obtenido al evaluar la funcion. Entonces =&(&1 * 2)= es una funcion anonima de aridad 1 que toma su primer parametro (primer y unico parametro) y devuelve el doble.
+** 
+=&(....)= tiene las siguientes variaciones:
+- =&{....}=: Funcion anonima que crea una tupla como resultado
+- =&[....]=: Funcion anonima que crea una lista como resultado
+Ejemplos:
+#+BEGIN_SRC elixir
+iex> cociente_residuo = &{ div(&1,&2), rem(&1,&2) }
+#Function<6.52032458/1 in :erl_eval.expr/5>
+iex> cociente_residuo.(13, 5)
+{2, 3}
+iex> lista = &[&1, &1 * 2, &1 * 3]
+#Function<6.52032458/1 in :erl_eval.expr/5>
+iex> lista.(5)
+[5, 10, 15]
+#+END_SRC
+** Usos de &
+Sabemos que hace =&(....)=, pero para que sirve?
+
+Sirve crear funciones anonimas como parametros de otras funciones:
+
+Ejemplos:
+#+BEGIN_SRC elixir
+iex> Enum.map [1,2,3,4], &(&1 + 1)
+[2, 3, 4, 5]
+iex> Enum.map [1,2,3,4], &(&1 * &1)
+[1, 4, 9, 16]
+iex> Enum.map [1,2,3,4], &(&1 < 3)
+[true, true, false, false]
+iex> Enum.filter [1,2,3,4], &(&1 <= 3)
+#+END_SRC
+
+** Ejercicios
+Crear funciones anonimas en sus 2 formas (fn, &, eso si esto es posible) que den estos resultados:
+#+BEGIN_SRC elixir
+iex> saludo.(%{nombre:"Albert", edad: 25})
+"Hola Albert, tienes 25 años"
+iex> proceso.(1..40)
+[1,4,9,16,25] # Elementos al cuadrado y luego filtrados (solo menores iguales a 30)
+#+END_SRC
+
+* Modulos
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+** Qué es un Modulo?
+Una vez que tu codigo crece, es una necesidad real estructuralo. Partes tu codigo en funciones con nombre y los organizas dentro de modulos.
+
+Los modulos te dan la habilidad de guardar, encapsular, compartir y manejar tu codigo de la manera más eficiente.
+
+Cada modulo tiene extension =.ex= ó =.exs= (=.ex= es para archivos que sera compilados y =.exs= son para crear scripts ó mejor dicho archivos que se interpretan en beam pero que no es necesario que se compilen).
+
+Nota: Nombres de Archivos que representen modulos respetan la regla del camello (CamelCase).
+** Creando nuestro primer modulo
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+Creamos el archivo =caida.exs= dentro de nuestra carpeta y con el editor de texto escribimos lo siguiente:
+
+#+BEGIN_SRC elixir
+#Archivo: caida.exs
+defmodule Caida do
+  def velocidad(altura) do
+    :math.sqrt(2 * 9.81 * altura)
+  end
+end
+#+END_SRC
+En el codigo escrito podemos ver que existe un modulo =Caida=, tal que engloba entre =do ...... end= a una funcion con nombre =velocidad=. Esta funcion =velocidad=, recibe un parametro =altura=, que al ser evaluada se matchea para luego ejecutarse el contenido entre =do ... end= que es =:math.sqrt(2 * 9.81 * altura)=
+** Cargando nuestro codigo en consola
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+Existen 2 formas de usar el codigo en archivos.
+- Ejecutando =iex <nombre de archivo>= para luego ejecutarlo
+#+BEGIN_SRC cmd
+$ iex caida.exs
+iex> Caida.velocidad(100)
+44.294469180700204
+#+END_SRC
+- Estando en iex, ejecutamos =c <"nombre de archivo">=
+#+BEGIN_SRC elixir
+iex> c "caida.exs"
+[Caida]
+iex> Caida.velocidad(100)
+44.294469180700204
+#+END_SRC
+** Patten Matching en funciones con nombre
+En funciones anonimas teniamos la posibilidad de crear multiples cuerpos ó por decirlo de otra forma, que la funcion responda segun los parametros de entrada.
+
+Lo mismo tenemos en funciones con nombres.
+
+Ejemplo:
+#+BEGIN_SRC elixir
+#factorial.exs
+defmodule Factorial do
+  def de(0), do: 1
+  def de(n), do: n * de(n-1)
+end
+#+END_SRC
+** 
+#+BEGIN_SRC elixir
+#factorial.exs
+defmodule Factorial do
+  def de(0), do: 1
+  def de(n), do: n * de(n-1)
+end
+#+END_SRC
+Cuando el parametro es 0, el resultado es 1.
+
+Cuando el parametro no es 0, almacenamos el parametro de entrada en la variable =n= y luego evaluamos =n= por el factorial de =n= menos 1.
+** 
+#+BEGIN_SRC elixir
+#factorial1.exs
+iex> c "factorial.exs"
+[Factorial]
+iex> Factorial.de(3)
+6
+iex> Factorial.de(7)
+5040
+iex> Factorial.de(10)
+3628800
+#+END_SRC
+** Otro ejemplo
+#+BEGIN_SRC elixir
+#fibo.exs
+defmodule Fibonacci do
+  def de(0), do: 0
+
+  def de(1), do: 1
+
+  def de(n) do
+    de(n-1) + de(n-2)
+  end
+end
+#+END_SRC
+** Guard Clauses
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+=when= nos ayuda a verificar los tipos de las variables que hacen match.
+#+BEGIN_SRC elixir
+#lista_numero.exs
+defmodule ListaNumero do
+  def que_es(x) when is_number(x) do
+    "#{x} es un numero"
+  end
+  def que_es(x) when is_list(x) do
+    "#{inspect(x)} es una lista"
+  end
+end
+#+END_SRC
+#+BEGIN_SRC elixir
+iex> c "lista_numero.exs"
+[ListaNumero]
+iex> ListaNumero.que_es(5)
+"5 es un numero"
+iex> ListaNumero.que_es([5])
+"[5] es una lista"
+#+END_SRC
+LIMITACIONES: Solo estan permitidas estas [[https://hexdocs.pm/elixir/guards.html#content][Guardias]] dentro de =when=. [[https://hexdocs.pm/elixir/guards.html#defining-custom-guard-expressions][O quizas no exista limitación]].
+** Ejercicio
+#+BEGIN_SRC elixir
+iex> fizzbuzz(15) #Multiplo de 5 y 3
+"Fizzbuzz"
+iex> fizzbuzz(6) #Multiplo de 3
+"Fizz"
+iex> fizzbuzz(10) #MUltiplo de 5
+"Buzz"
+iex> fizbuzz("Holi")
+"Qué paso amiguito?"
+#+END_SRC
+
+* The amazing Pipe Operator
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+** Pipe Operator |>
+Que pasa si queremos elevar al cuadrado los elementos de una lista para luego filtrar a los que sean menores a 40. Tendriamos que usar la siguiente funcion:
+#+BEGIN_SRC elixir
+iex> lista = 1..10
+1..10
+iex> cuadrado = Enum.map(lista, &(&1 * &1))
+[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+iex> filtrado = Enum.filter(cuadrado, &(&1 < 40))
+[1, 4, 9, 16, 25, 36]
+#+END_SRC
+Entendemos este codigo, pero almacenamos muchas variables temporales (codigo poco eficiente).
+** Pipe Operator |>
+Ahora, si no queremos almacenar variables temporales podemos hacer lo siguiente:
+#+BEGIN_SRC elixir
+iex> filtrado = Enum.filter(Enum.map(1..10, &(&1 * &1)), &(&1 < 40))
+[1, 4, 9, 16, 25, 36]
+## Lo siento, por hacerles ver algo tan feo.
+#+END_SRC
+Funciona, pero es dificil de leer y escalar, facilmente puede ocasionar errores. No es elegante.
+* 
+Muchos lenguajes nos obligan a tomar una decision sobre cual usar. Ser poco productivo pero hacer codigo eficiente ó ser productivo pero tu codigo es ineficiente.
+calma.jpg
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 600px
+[[file:images/calma.jpg]]
+#+END_CENTER
+** 
+Siganme los buenos.
+
+Una solucion elegante es pensar en funciones como transformaciones de información. Tal que el primer parametro de una funcion es el elemento a transformar, y los demas parametros son configuraciones a la transformación que se da.
+
+Resumiendo en una sola linea. En ves de usar f(val,a,b), usamos val |> f(a,b). 
+
+Aplicando a nuestro ejemplo.
+#+BEGIN_SRC elixir
+iex> resultado = 1..10 |> Enum.map(&(&1*&1)) |> Enum.filter(&(&1 < 40))
+[1, 4, 9, 16, 25, 36]
+#+END_SRC
+
+** 
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 450px
+[[file:images/mi_astucia.jpg]]
+#+END_CENTER
+
+* Recursión
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+** Implementación de Listas (Necesario tener claro como funcionan las listas)
+Las listas en Elixir pueden ser vacias ó pares inmutables =head/tail= 
+
+donde el =head= contiene un valor y el =tail= es en si misma una lista
+
+Ejemplos:
+#+BEGIN_SRC elixir
+iex> [ head | tail ] = [ 1, 2, 3 ] # => [1, 2, 3]
+iex> head 
+1
+iex> tail 
+[2, 3]
+#+END_SRC
+
+** Prepending en listas es =Rapido=
+#+BEGIN_SRC elixir
+iex> list1 = [1, 2, 3]
+iex> list2 = [0 | list1] 
+#+END_SRC
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 700px
+[[file:images/prepending.png]]
+#+END_CENTER
+
+** Appending en listas es =Lento=
+#+BEGIN_SRC elixir
+iex> list1 = [1, 2, 3]
+iex> list2 = list1 ++ [4] 
+#+END_SRC
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 700px
+[[file:images/appending.png]]
+#+END_CENTER
+
+** Insertar elementos es =Lento=
+#+BEGIN_SRC elixir
+iex> list1 = [1, 3, 4]
+iex> list2 = List.insert_at(list1, 1, 2) # insertando 2 en la segunda posicion
+iex> [1, 2, 3, 4]
+#+END_SRC
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 700px
+[[file:images/insert_list.png]]
+#+END_CENTER
+
+** Implementación de Listas
+- Elixir son pares head/tail
+- Inmutabilidad hacen que sean eficientes en memoria
+- Prepending es RAPIDO
+- Appending es LENTO
+- Insertando elementos puede ser lento
+- Leer la lista entera puede ser lento
+
+
+
+* Gracias ˊ・ω・ˋ
+:PROPERTIES:
+:SLIDE: thank-you-slide segue
+:ASIDE: right
+:ARTICLE: flexbox vleft auto-fadein
+:END:
