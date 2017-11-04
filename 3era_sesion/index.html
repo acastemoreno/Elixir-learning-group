@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<!-- 2017-11-04 sáb 12:30 -->
+<meta  charset="utf-8" />
+<meta  htto-equiv="X-UA-Compatible" content="chrome=1" />
+<meta  name="generator" content="Org-mode with org-ioslide" />
+<meta  name="author" content="Albert Castellano Moreno" />
+
+
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--This one seems to work all the time, but really small on ipad-->
+<!--<meta name="viewport" content="initial-scale=0.4">-->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" media="all" href="theme/css/default.css" />
+<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css" />
+<link rel="stylesheet" media="all" href="theme/css/small-icon.css" />
+<base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+<script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+
+   <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+
+<script src="js/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML,local/local" type="text/javascript"></script>
+</head>
+<body style="opacity: 0">
+<slides class="layout-widescreen">
+<slide class="title-slide segue nobackground">
+       <aside class="gdbar"><img src="images/elixir.png"></aside>
+       <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+       <hgroup class="auto-fadein">
+         <h1 data-config-title><!-- populated from slide_config.json --></h1>
+         <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+         <p data-config-presenter><!-- populated from slide_config.json --></p>
+       </hgroup>
+    </slide>
+  
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org0356144" class="outline-3">
+<h3 id="org0356144">Tarea</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; fizzbuzz(15) #Multiplo de 5 y 3
+"Fizzbuzz"
+iex&gt; fizzbuzz(6) #Multiplo de 3
+"Fizz"
+iex&gt; fizzbuzz(10) #MUltiplo de 5
+"Buzz"
+iex&gt; fizbuzz("Holi")
+"Qué paso amiguito?"</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-org628bc09" class="outline-2">
+<h2 id="org628bc09">Recursión</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org5ca3316" class="outline-3">
+<h3 id="org5ca3316">Implementación de Listas (Necesario tener claro como funcionan las listas)</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Las listas en Elixir pueden ser vacias ó pares inmutables <code>head/tail</code>
+</p>
+
+<p>
+donde el <code>head</code> contiene un valor y el <code>tail</code> es en si misma una lista
+</p>
+
+<p>
+Ejemplos:
+</p>
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; [ head | tail ] = [ 1, 2, 3 ] # =&gt; [1, 2, 3]
+iex&gt; head
+1
+iex&gt; tail
+[2, 3]</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org8695749" class="outline-3">
+<h3 id="org8695749">Prepending en listas es <code>Rapido</code></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; list1 = [1, 2, 3]
+iex&gt; list2 = [0 | list1]</pre>
+
+</div>
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/prepending.png" alt="prepending.png" width="700px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org5cf0aba" class="outline-3">
+<h3 id="org5cf0aba">Appending en listas es <code>Lento</code></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; list1 = [1, 2, 3]
+iex&gt; list2 = list1 ++ [4]</pre>
+
+</div>
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/appending.png" alt="appending.png" width="700px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org2d3fd62" class="outline-3">
+<h3 id="org2d3fd62">Insertar elementos es <code>Lento</code></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; list1 = [1, 3, 4]
+iex&gt; list2 = List.insert_at(list1, 1, 2) # insertando 2 en la segunda posicion
+iex&gt; [1, 2, 3, 4]</pre>
+
+</div>
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/insert_list.png" alt="insert_list.png" width="700px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgf1714e0" class="outline-3">
+<h3 id="orgf1714e0">Implementación de Listas</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<ul>
+<li>Elixir son pares head/tail</li>
+<li>Inmutabilidad hacen que sean eficientes en memoria</li>
+<li>Prepending es RAPIDO</li>
+<li>Appending es LENTO</li>
+<li>Insertando elementos puede ser lento</li>
+<li>Leer la lista entera puede ser lento</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org410998b" class="outline-3">
+<h3 id="org410998b">Recursion</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<blockquote>
+<p>
+Recurrencia, recursión o recursividad es la forma en la cual se especifica un proceso basado en su propia definición.
+<span class='float-right'>&#x2013; Wikipedia</span><br  />
+</p>
+</blockquote>
+<blockquote>
+<p>
+De hecho, recursión es una de las ideas centrales de ciencia de computación. Resolver un problema mediante recursión significa que la solución depende de las soluciones de pequeñas instancias del mismo problema.
+<span class='float-right'>&#x2013; Recursión (ciencias de computación) - Wikipedia</span><br  />
+</p>
+</blockquote>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-org5c357e5" class="outline-2">
+<h2 id="org5c357e5">Disminuye y conquista</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgb63d55e" class="outline-3">
+<h3 id="orgb63d55e">Disminuye y conquista</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+<b>Disminuye y conquista</b> es una tecnica para reducir un problema a su forma más simple y comenzar a resolverlo de forma incremental. AL hacer esto, encontramos la solución más obvia de una parte del problema. Apartir de ahí comenzamos a conquistar progresivamente, incrementando el problema paso a paso. Experimentemos calculando la longitud de una lista.
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org897ca62" class="outline-3">
+<h3 id="org897ca62">Longitud de una lista</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+#mi_lista.ex
+defmodule MiLista do
+  def longitud([]), do: 0
+  def longitud([_]), do: 1+0
+  def longitud([_,_]), do: 1+1+0
+  def longitud([_,_,_]), do: 1+1+1+0
+end
+
+iex&gt;MiLista.longitud([])
+0
+iex&gt;MiLista.longitud(["1"])
+1
+iex&gt;MiLista.longitud([1,2])
+2
+iex&gt;MiLista.longitud([3,2,1,0])
+Bug!!</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org67eb4a1" class="outline-3">
+<h3 id="org67eb4a1">Partiendo de la solución más simple</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+defmodule MiLista do
+  def longitud([]), do: 0
+  def longitud([_]), do: 1+longitud([])
+  def longitud([_,_]), do: 1+longitud([_])
+  def longitud([_,_,_]), do: 1+longitud([_,_])
+end
+# Ahora observamos que existe un patrón que empieza en la segunda defición de longitud.
+# Habra manera de reducir paso por paso la longitud de cualquier lista ?</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org9c9344e" class="outline-3">
+<h3 id="org9c9344e">Solución (añadiendo definición de error)</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+defmodule MiLista do
+  def longitud([]), do: 0
+  def longitud([_ | tail]), do: 1+longitud(tail)
+  def longitud(_), do: "Que paso amiguito?"
+end</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgc3efcbe" class="outline-3">
+<h3 id="orgc3efcbe">Cool, pero que pasa si?</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt;MiLista.longitud(1..1_000_000)
+=1+longitud(2..1_000_000)
+=1+(1+longitud(3..1_000_000))
+=1+(1+(1+longitud(4..1_000_000)))
+=1+(1+(1+(1+(1+(1+(1+(1+(1+(1+(.......))))))))))</pre>
+
+</div>
+<p>
+El consumo de memoria puede ocasionar el colapso total de nuestro sistema. <b>Stackoverflow</b>
+</p>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org04143ba" class="outline-3">
+<h3 id="org04143ba">Arreglemos la función (Tail Call Optimization)</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+Para evitar <b>stackoverflow</b>, elixir nos aconseja que lo ultimo que hagamos en una función <b>recursiva</b> es ejecutar una función.
+Pero en nuestro caso necesitamos que la función se llame a si misma al final de su ejecución.
+</p>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+defmodule MiLista do
+  def longitud([]), do: 0
+  def longitud([_ | tail]), do: <b>longitud(tail)</b>
+  def longitud(_), do: "Que paso amiguito?"
+end
+# Ahora necesitamos ir acumulando resultados parciales cada vez que se reduzca
+# (esto nos obliga a crear un nuevo parametro que sirva como acumulador)</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org8d8fd3f" class="outline-3">
+<h3 id="org8d8fd3f"></h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+defmodule MiLista do
+  def longitud([], <b>acc</b>), do: 0
+  def longitud([_ | tail], <b>acc</b>), do: longitud(tail, <b>acc</b>)
+  def longitud(_, _), do: "Que paso amiguito?"
+end</pre>
+
+</div>
+
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+# Agregamos la suma con 1, y devolucion de aculumador en la caso más basico 
+defmodule MiLista do
+  def longitud([], acc), do: <b>acc</b>
+  def longitud([_ | tail], acc), do: longitud(tail, <b>acc+1</b>)
+  def longitud(_, _), do: "Que paso amiguito?"
+end
+iex&gt; MiLista.longitud([],0) #0
+iex&gt; MiLista.longitud(["1"],0) #1
+iex&gt; MiLista.longitud(["1", "2"], 1) #3
+#Error. Significa que siempre debemos tener cuidado de ingresar siempre 0
+#como segundo parametro :/</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgfd74bf9" class="outline-3">
+<h3 id="orgfd74bf9">Que sea más facil de utilizar</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+# cambiamos la funcion para que sea privada y sea utilizada por otra función
+defmodule MiLista do
+  def longitud(lista) when lista |&gt; is_list, do: <b>_</b>longitud(lista, 0)
+  def longitud(_), do: "Que paso amiguito?"
+
+  def<b>p _</b>longitud([], acc), do: acc
+  def<b>p _</b>longitud([_ | tail], acc), do: <b>_</b>longitud(tail, acc+1)
+end</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org711f029" class="outline-3">
+<h3 id="org711f029">Más ejemplos</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+iex&gt; MiLista.suma([1,2,3,4,5,6])
+21
+iex&gt; MiLista.maximo([4,2,16,9,10])
+16
+iex&gt; MiLista.minimo([4,2,16,9,10])
+2
+iex&gt; MiLista.map([1,2,3,4,5], &amp;(&amp;1*&amp;1))
+[1,4,9,16,25]
+iex&gt; MiLista.fibonacci([1,1], 7)
+[1,1,2,3,5,8,13]
+iex&gt; MiLista.tribonacci([1,1,1], 7)
+[1,1,1,3,5,9,17]</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+
+</slide>
+<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
+<aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
+       <h2 class=" "><div id="outline-container-org4f5d603" class="outline-2">
+<h2 id="org4f5d603">Divide y conquista</h2>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="flexbox vleft auto-fadein" id="text-">
+
+
+</article>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgd9c3404" class="outline-3">
+<h3 id="orgd9c3404">Currying (Pre-Debugging)</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="smaller" id="text-">
+<blockquote>
+<p>
+"Chaining small functions in sequence" (rather than having a large function do a lot of stuff)
+</p>
+
+<p>
+<span class='float-right'>&#x2013; Haskell Curry</span><br  />
+</p>
+</blockquote>
+<article class="flexbox vcenter">
+
+<div class="figure">
+<p><img src="images/HaskellBCurry.jpg" alt="HaskellBCurry.jpg" Width="250px" />
+</p>
+</div>
+</article>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org811108f" class="outline-3">
+<h3 id="org811108f">Divide y conquista</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+<b>Divide y conquista</b> es una tecnica que trata sobre separar el problema en 2 o más partes. Por ejemplo, si tramos de obtener todo que necesitemos de una base de datos en un solo query, el query <b>select</b> sera dificil de escribir y mantener. En cambio si <b>dividimos</b> el query en querys pequeños e independientes el codigo se vuelve facil de programar y mantener.
+</p>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orgdef96ad" class="outline-3">
+<h3 id="orgdef96ad">Ejemplo: Ordenar una lista (merge sort)</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<p>
+2 funciones:
+</p>
+<ul>
+<li>Si tenemos 2 listas ordenadas, se puede crear facilmente una lista ordenada de los elementos de ambas listas.</li>
+<li>Una lista grande puede ser separada en 2 listas más pequeñas. (Procesar listas de menor longitud es más facil)</li>
+</ul>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org69cef25" class="outline-3">
+<h3 id="org69cef25">1era función (merge)</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+merge([<b>5</b>, 9], [<b>1</b>, 4, 5])
+[1 | merge([<b>5</b>, 9], [<b>4</b>, 5])]
+[1, 4 | merge([<b>5</b>, 9], [<b>5</b>])]
+[1, 4, 5 | merge([<b>9</b>], [<b>5</b>])]
+[1, 4, 5, 5 | merge([<b>9</b>], [])]
+[1, 4, 5, 5, 9]</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-orga7d7cad" class="outline-3">
+<h3 id="orga7d7cad">1era funcion (merge)</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+defmodule Ordenar do
+  defp merge([], lista_b), do: lista_b
+  defp merge(lista_a, []), do: lista_a
+  defp merge([head_a | tail_a], lista_b = [head_b | _]) when head_a &lt;= head_b do
+    [head_a | merge(tail_a, lista_b)]
+  end
+  defp merge(lista_a = [head_a | _], [head_b | tail_b]) when head_a &gt; head_b do
+    [head_b | merge(lista_a, tail_b)]
+  end
+end</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org246fb2f" class="outline-3">
+<h3 id="org246fb2f">2da funcion (ascendente)</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+defmodule Ordenar do
+  def ascendente([]), do: []
+  def ascendente([a]), do: [a]
+  def ascendente(lista) do
+    mitad = div(Enum.count(lista), 2)
+    {lista_a, lista_b} = Enum.split(lista, mitad)
+    merge(
+      ascendente(lista_a),
+      ascentente(lista_b)
+    )
+  end
+end</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+</slide>
+<slide id="sec-"  >
+<hgroup class="">
+       <h2 class=" "><div id="outline-container-org28eaa43" class="outline-3">
+<h3 id="org28eaa43">Paso por paso</h3>
+</div>
+</h2>
+       <h3></h3>
+       </hgroup>
+<article class="" id="text-">
+<div class="org-src-container">
+
+<pre class="prettyprint" data-lang="elixir">
+ascendente([9,5,1,5,4])
+merge(ascendente([9,5]), ascendente([1,5,4]))
+merge(merge([9], [5]), merge(ascedente([1,5], [4])))
+merge(merge([9], [5]), merge(merge([1], [5]), [4]))
+merge([5, 9], merge([1, 5], [4]))
+merge([5, 9], [1, 4, 5])
+[1, 4, 5, 5, 9]</pre>
+
+</div>
+
+
+</article>
+
+</slide>
+
+</slide>
+</slide>
+<slide id="sec-" class=" thank-you-slide segue nobackground" style="background-image: url(nil)">
+<aside class="gdbar right"><img src="images/elixir.png"></aside><article class="flexbox vleft auto-fadein" id="text-">
+<h2>
+  <p>Gracias ˊ・ω・ˋ</p>
+</h2>
+<br>
+<p class="auto-fadein" data-config-contact>
+</p>
+</article>
+
+</slide>
+<slide class="backdrop"></slide>
+</slides> 
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body> 
+
+</html>

@@ -2,7 +2,7 @@
 <html>
 <head>
 <title></title>
-<!-- 2017-10-28 sáb 16:10 -->
+<!-- 2017-11-04 sáb 12:34 -->
 <meta  charset="utf-8" />
 <meta  htto-equiv="X-UA-Compatible" content="chrome=1" />
 <meta  name="generator" content="Org-mode with org-ioslide" />
@@ -38,8 +38,8 @@
   
 <slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
 <aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
-       <h2 class=" "><div id="outline-container-orgbb6bbe8" class="outline-2">
-<h2 id="orgbb6bbe8">Funciones anonimas</h2>
+       <h2 class=" "><div id="outline-container-orge6aaea5" class="outline-2">
+<h2 id="orge6aaea5">Funciones anonimas</h2>
 </div>
 </h2>
        <h3></h3>
@@ -52,8 +52,8 @@
 </slide>
 <slide id="sec-"  >
 <hgroup class="">
-       <h2 class=" "><div id="outline-container-orgf334696" class="outline-3">
-<h3 id="orgf334696">Creando funciones anonimas</h3>
+       <h2 class=" "><div id="outline-container-orgca9852a" class="outline-3">
+<h3 id="orgca9852a">Creando funciones anonimas</h3>
 </div>
 </h2>
        <h3></h3>
@@ -89,8 +89,8 @@ iex&gt; sum.(1, 2)
 </slide>
 <slide id="sec-"  >
 <hgroup class="">
-       <h2 class=" "><div id="outline-container-org36b2955" class="outline-3">
-<h3 id="org36b2955">Funciones anonimas creadas en multiples Lineas</h3>
+       <h2 class=" "><div id="outline-container-orgeb64ab3" class="outline-3">
+<h3 id="orgeb64ab3">Funciones anonimas creadas en multiples Lineas</h3>
 </div>
 </h2>
        <h3></h3>
@@ -120,8 +120,8 @@ iex&gt; velocidad.(10)
 </slide>
 <slide id="sec-"  >
 <hgroup class="">
-       <h2 class=" "><div id="outline-container-org9631e82" class="outline-3">
-<h3 id="org9631e82">Funciones Anonimas y Pattern Matching</h3>
+       <h2 class=" "><div id="outline-container-org58f44fc" class="outline-3">
+<h3 id="org58f44fc">Funciones Anonimas y Pattern Matching</h3>
 </div>
 </h2>
        <h3></h3>
@@ -151,8 +151,8 @@ iex&gt; intercambio.({6, 8})
 </slide>
 <slide id="sec-"  >
 <hgroup class="">
-       <h2 class=" "><div id="outline-container-orgf6e4c1e" class="outline-3">
-<h3 id="orgf6e4c1e">Una funcion anonima, multiples cuerpos</h3>
+       <h2 class=" "><div id="outline-container-org679cfcc" class="outline-3">
+<h3 id="org679cfcc">Una funcion anonima, multiples cuerpos</h3>
 </div>
 </h2>
        <h3></h3>
@@ -169,22 +169,8 @@ Para el siguiente ejemplo, en mi carpeta creo un archivo <code>holiwoli.txt</cod
 </p>
 </div>
 </article>
-
-
-</article>
-
-</slide>
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org2689e34" class="outline-3">
-<h3 id="org2689e34"></h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
 <p>
+**
 Ejecuto <code>iex</code> en la carpeta donde se ubica <code>holiwoli.txt</code> y ejecuto lo siguiente. Analizamos el uso de una funcion llamada <code>open</code>, dentro de la libreria <code>File</code>, que por defecto Elixir ya incorpora.
 </p>
 <article class="flexbox vcenter">
@@ -196,23 +182,7 @@ Ejecuto <code>iex</code> en la carpeta donde se ubica <code>holiwoli.txt</code> 
 </article>
 <p>
 Al ejecutar la funcion, esta retorna una tupla, tal que su primer elemento es un atomo que representa el exito o fracaso de la operación, y el segundo es segun el primer termino, un identificador unico de proceso ó un mensaje de error.
-</p>
-
-
-</article>
-
-</slide>
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-orgdfa1c6c" class="outline-3">
-<h3 id="orgdfa1c6c"></h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
-<p>
+**
 Ahora creamos una funcion anonima que procese ese resultado y dependiendo del caso realiza una accion u otra.
 </p>
 <div class="org-src-container">
@@ -225,21 +195,12 @@ iex&gt; verificar_archivo = fn
 #Function&lt;6.52032458/1 in :erl_eval.expr/5&gt;</pre>
 
 </div>
-
-
-</article>
-
-</slide>
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org6368a48" class="outline-3">
-<h3 id="org6368a48"></h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="smaller" id="text-">
+<p>
+**
+</p>
+<p>
+:ARTICLE:  smaller
+</p>
 <article class="flexbox vcenter">
 
 <div class="figure">
@@ -265,27 +226,19 @@ Significa que importa el orden de las <code>definiciones</code>.
 </slide>
 <slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
 <aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
-       <h2 class=" "><div id="outline-container-orgdffcf3c" class="outline-2">
-<h2 id="orgdffcf3c">Shortcut &amp;</h2>
+       <h2 class=" "><div id="outline-container-org19d2bb3" class="outline-2">
+<h2 id="org19d2bb3">Shortcut &amp;</h2>
 </div>
 </h2>
        <h3></h3>
        </hgroup>
 <article class="flexbox vleft auto-fadein" id="text-">
-
-
-</article>
-
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org8bc8b65" class="outline-3">
-<h3 id="org8bc8b65"></h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="smaller" id="text-">
+<p>
+**
+</p>
+<p>
+:ARTICLE:  smaller
+</p>
 <p>
 Hemos observador hasta el momento que para crear una funcion anonima es necesario definir 2 partes importantes:
 </p>
@@ -311,23 +264,7 @@ iex&gt; doble.(7)
 </div>
 <p>
 <code>&amp;(...)</code> se refiere a la creacion de una funcion anonima. <code>&amp;1</code> representa el primer parametro  obtenido al evaluar la funcion. Entonces <code>&amp;(&amp;1 * 2)</code> es una funcion anonima de aridad 1 que toma su primer parametro (primer y unico parametro) y devuelve el doble.
-</p>
-
-
-</article>
-
-</slide>
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org0dfd4da" class="outline-3">
-<h3 id="org0dfd4da"></h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
-<p>
+**
 <code>&amp;(....)</code> tiene las siguientes variaciones:
 </p>
 <ul>
@@ -353,13 +290,11 @@ iex&gt; lista.(5)
 
 
 </article>
-
-</slide>
 </slide>
 <slide id="sec-"  >
 <hgroup class="">
-       <h2 class=" "><div id="outline-container-orgc8499ab" class="outline-3">
-<h3 id="orgc8499ab">Usos de &amp;</h3>
+       <h2 class=" "><div id="outline-container-org86927a0" class="outline-3">
+<h3 id="org86927a0">Usos de &amp;</h3>
 </div>
 </h2>
        <h3></h3>
@@ -397,8 +332,8 @@ iex&gt; Enum.filter [1,2,3,4], &amp;(&amp;1 &lt;= 3)</pre>
 </slide>
 <slide id="sec-"  >
 <hgroup class="">
-       <h2 class=" "><div id="outline-container-orgf47007e" class="outline-3">
-<h3 id="orgf47007e">Ejercicios</h3>
+       <h2 class=" "><div id="outline-container-org08b2da4" class="outline-3">
+<h3 id="org08b2da4">Ejercicios</h3>
 </div>
 </h2>
        <h3></h3>
@@ -427,8 +362,8 @@ iex&gt; proceso.(1..40)
 </slide>
 <slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
 <aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
-       <h2 class=" "><div id="outline-container-orgc86b2bb" class="outline-2">
-<h2 id="orgc86b2bb">Modulos</h2>
+       <h2 class=" "><div id="outline-container-org6498433" class="outline-2">
+<h2 id="org6498433">Modulos</h2>
 </div>
 </h2>
        <h3></h3>
@@ -440,8 +375,8 @@ iex&gt; proceso.(1..40)
 </slide>
 <slide id="sec-"  >
 <hgroup class="">
-       <h2 class=" "><div id="outline-container-org4e25792" class="outline-3">
-<h3 id="org4e25792">Qué es un Modulo?</h3>
+       <h2 class=" "><div id="outline-container-org1468366" class="outline-3">
+<h3 id="org1468366">Qué es un Modulo?</h3>
 </div>
 </h2>
        <h3></h3>
@@ -470,8 +405,8 @@ Nota: Nombres de Archivos que representen modulos respetan la regla del camello 
 </slide>
 <slide id="sec-"  >
 <hgroup class="">
-       <h2 class=" "><div id="outline-container-org55d92bc" class="outline-3">
-<h3 id="org55d92bc">Creando nuestro primer modulo</h3>
+       <h2 class=" "><div id="outline-container-org631dae1" class="outline-3">
+<h3 id="org631dae1">Creando nuestro primer modulo</h3>
 </div>
 </h2>
        <h3></h3>
@@ -503,8 +438,8 @@ En el codigo escrito podemos ver que existe un modulo <code>Caida</code>, tal qu
 </slide>
 <slide id="sec-"  >
 <hgroup class="">
-       <h2 class=" "><div id="outline-container-org48d4317" class="outline-3">
-<h3 id="org48d4317">Cargando nuestro codigo en consola</h3>
+       <h2 class=" "><div id="outline-container-orgcb67866" class="outline-3">
+<h3 id="orgcb67866">Cargando nuestro codigo en consola</h3>
 </div>
 </h2>
        <h3></h3>
@@ -544,8 +479,8 @@ iex&gt; Caida.velocidad(100)
 </slide>
 <slide id="sec-"  >
 <hgroup class="">
-       <h2 class=" "><div id="outline-container-org3e1e5c3" class="outline-3">
-<h3 id="org3e1e5c3">Patten Matching en funciones con nombre</h3>
+       <h2 class=" "><div id="outline-container-org36997b0" class="outline-3">
+<h3 id="org36997b0">Patten Matching en funciones con nombre</h3>
 </div>
 </h2>
        <h3></h3>
@@ -572,21 +507,9 @@ defmodule Factorial do
 end</pre>
 
 </div>
-
-
-</article>
-
-</slide>
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org0a5126c" class="outline-3">
-<h3 id="org0a5126c"></h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
+<p>
+**
+</p>
 <div class="org-src-container">
 
 <pre class="prettyprint" data-lang="elixir">
@@ -603,22 +526,8 @@ Cuando el parametro es 0, el resultado es 1.
 
 <p>
 Cuando el parametro no es 0, almacenamos el parametro de entrada en la variable <code>n</code> y luego evaluamos <code>n</code> por el factorial de <code>n</code> menos 1.
+**
 </p>
-
-
-</article>
-
-</slide>
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org006d695" class="outline-3">
-<h3 id="org006d695"></h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
 <div class="org-src-container">
 
 <pre class="prettyprint" data-lang="elixir">
@@ -641,8 +550,8 @@ iex&gt; Factorial.de(10)
 </slide>
 <slide id="sec-"  >
 <hgroup class="">
-       <h2 class=" "><div id="outline-container-orgca294cb" class="outline-3">
-<h3 id="orgca294cb">Otro ejemplo</h3>
+       <h2 class=" "><div id="outline-container-org2defeb1" class="outline-3">
+<h3 id="org2defeb1">Otro ejemplo</h3>
 </div>
 </h2>
        <h3></h3>
@@ -671,8 +580,8 @@ end</pre>
 </slide>
 <slide id="sec-"  >
 <hgroup class="">
-       <h2 class=" "><div id="outline-container-orgdcb4b16" class="outline-3">
-<h3 id="orgdcb4b16">Guard Clauses</h3>
+       <h2 class=" "><div id="outline-container-orgb0eac99" class="outline-3">
+<h3 id="orgb0eac99">Guard Clauses</h3>
 </div>
 </h2>
        <h3></h3>
@@ -717,8 +626,8 @@ LIMITACIONES: Solo estan permitidas estas <a href="https://hexdocs.pm/elixir/gua
 </slide>
 <slide id="sec-"  >
 <hgroup class="">
-       <h2 class=" "><div id="outline-container-orgdfd94e6" class="outline-3">
-<h3 id="orgdfd94e6">Ejercicio</h3>
+       <h2 class=" "><div id="outline-container-org54911bd" class="outline-3">
+<h3 id="org54911bd">Ejercicio</h3>
 </div>
 </h2>
        <h3></h3>
@@ -748,8 +657,8 @@ iex&gt; fizbuzz("Holi")
 </slide>
 <slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
 <aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
-       <h2 class=" "><div id="outline-container-org2ea529b" class="outline-2">
-<h2 id="org2ea529b">The amazing Pipe Operator</h2>
+       <h2 class=" "><div id="outline-container-org33d147e" class="outline-2">
+<h2 id="org33d147e">The amazing Pipe Operator</h2>
 </div>
 </h2>
        <h3></h3>
@@ -762,8 +671,8 @@ iex&gt; fizbuzz("Holi")
 </slide>
 <slide id="sec-"  >
 <hgroup class="">
-       <h2 class=" "><div id="outline-container-org57ee2d0" class="outline-3">
-<h3 id="org57ee2d0">Pipe Operator |&gt;</h3>
+       <h2 class=" "><div id="outline-container-org415f22f" class="outline-3">
+<h3 id="org415f22f">Pipe Operator |&gt;</h3>
 </div>
 </h2>
        <h3></h3>
@@ -794,8 +703,8 @@ Entendemos este codigo, pero almacenamos muchas variables temporales (codigo poc
 </slide>
 <slide id="sec-"  >
 <hgroup class="">
-       <h2 class=" "><div id="outline-container-orge97238b" class="outline-3">
-<h3 id="orge97238b">Pipe Operator |&gt;</h3>
+       <h2 class=" "><div id="outline-container-org50eb206" class="outline-3">
+<h3 id="org50eb206">Pipe Operator |&gt;</h3>
 </div>
 </h2>
        <h3></h3>
@@ -815,24 +724,8 @@ iex&gt; filtrado = Enum.filter(Enum.map(1..10, &amp;(&amp;1 * &amp;1)), &amp;(&a
 <p>
 Funciona, pero es dificil de leer y escalar, facilmente puede ocasionar errores. No es elegante.
 </p>
-
-
-</article>
-
-</slide>
-
-</slide>
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org2f7f6d9" class="outline-2">
-<h2 id="org2f7f6d9"></h2>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
 <p>
+*
 Muchos lenguajes nos obligan a tomar una decision sobre cual usar. Ser poco productivo pero hacer codigo eficiente ó ser productivo pero tu codigo es ineficiente.
 calma.jpg
 </p>
@@ -843,20 +736,8 @@ calma.jpg
 </p>
 </div>
 </article>
-
-
-</article>
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-orgd004dd1" class="outline-3">
-<h3 id="orgd004dd1"></h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
 <p>
+**
 Siganme los buenos.
 </p>
 
@@ -865,7 +746,7 @@ Una solucion elegante es pensar en funciones como transformaciones de informaci�
 </p>
 
 <p>
-Resumiendo en una sola linea. En ves de usar f(val,a,b), usamos val |&gt; f(a,b). 
+Resumiendo en una sola linea. En ves de usar f(val,a,b), usamos val |&gt; f(a,b).
 </p>
 
 <p>
@@ -879,21 +760,9 @@ iex&gt; resultado = 1..10 |&gt; Enum.map(&amp;(&amp;1*&amp;1)) |&gt; Enum.filter
 
 </div>
 
-
-</article>
-
-</slide>
-
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org973939c" class="outline-3">
-<h3 id="org973939c"></h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
+<p>
+**
+</p>
 <article class="flexbox vcenter">
 
 <div class="figure">
@@ -909,388 +778,6 @@ iex&gt; resultado = 1..10 |&gt; Enum.map(&amp;(&amp;1*&amp;1)) |&gt; Enum.filter
 
 </slide>
 
-</slide>
-<slide id="sec-" class=" segue dark quote nobackground" style="background-image: url(nil)">
-<aside class="gdbar right bottom"><img src="images/elixir.png"></aside><hgroup class="">
-       <h2 class=" "><div id="outline-container-orgbfd7380" class="outline-2">
-<h2 id="orgbfd7380">Recursión</h2>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="flexbox vleft auto-fadein" id="text-">
-
-
-</article>
-
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-orga0dabdb" class="outline-3">
-<h3 id="orga0dabdb">Implementación de Listas (Necesario tener claro como funcionan las listas)</h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
-<p>
-Las listas en Elixir pueden ser vacias ó pares inmutables <code>head/tail</code> 
-</p>
-
-<p>
-donde el <code>head</code> contiene un valor y el <code>tail</code> es en si misma una lista
-</p>
-
-<p>
-Ejemplos:
-</p>
-<div class="org-src-container">
-
-<pre class="prettyprint" data-lang="elixir">
-iex&gt; [ head | tail ] = [ 1, 2, 3 ] # =&gt; [1, 2, 3]
-iex&gt; head 
-1
-iex&gt; tail 
-[2, 3]</pre>
-
-</div>
-
-
-</article>
-
-</slide>
-
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org497a755" class="outline-3">
-<h3 id="org497a755">Prepending en listas es <code>Rapido</code></h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
-<div class="org-src-container">
-
-<pre class="prettyprint" data-lang="elixir">
-iex&gt; list1 = [1, 2, 3]
-iex&gt; list2 = [0 | list1] </pre>
-
-</div>
-<article class="flexbox vcenter">
-
-<div class="figure">
-<p><img src="images/prepending.png" alt="prepending.png" width="700px" />
-</p>
-</div>
-</article>
-
-
-</article>
-
-</slide>
-
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org8794b36" class="outline-3">
-<h3 id="org8794b36">Appending en listas es <code>Lento</code></h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
-<div class="org-src-container">
-
-<pre class="prettyprint" data-lang="elixir">
-iex&gt; list1 = [1, 2, 3]
-iex&gt; list2 = list1 ++ [4] </pre>
-
-</div>
-<article class="flexbox vcenter">
-
-<div class="figure">
-<p><img src="images/appending.png" alt="appending.png" width="700px" />
-</p>
-</div>
-</article>
-
-
-</article>
-
-</slide>
-
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org6ab01b6" class="outline-3">
-<h3 id="org6ab01b6">Insertar elementos es <code>Lento</code></h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
-<div class="org-src-container">
-
-<pre class="prettyprint" data-lang="elixir">
-iex&gt; list1 = [1, 3, 4]
-iex&gt; list2 = List.insert_at(list1, 1, 2) # insertando 2 en la segunda posicion
-iex&gt; [1, 2, 3, 4]</pre>
-
-</div>
-<article class="flexbox vcenter">
-
-<div class="figure">
-<p><img src="images/insert_list.png" alt="insert_list.png" width="700px" />
-</p>
-</div>
-</article>
-
-
-</article>
-
-</slide>
-
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org9f7eb52" class="outline-3">
-<h3 id="org9f7eb52">Implementación de Listas</h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
-<ul>
-<li>Elixir son pares head/tail</li>
-<li>Inmutabilidad hacen que sean eficientes en memoria</li>
-<li>Prepending es RAPIDO</li>
-<li>Appending es LENTO</li>
-<li>Insertando elementos puede ser lento</li>
-<li>Leer la lista entera puede ser lento</li>
-</ul>
-
-
-</article>
-
-</slide>
-
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org2595ff7" class="outline-3">
-<h3 id="org2595ff7">Recursion</h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
-<blockquote>
-<p>
-Recurrencia, recursión o recursividad es la forma en la cual se especifica un proceso basado en su propia definición.
-<span class='float-right'>&#x2013; Wikipedia</span><br  />
-</p>
-</blockquote>
-<blockquote>
-<p>
-De hecho, recursión es una de las ideas centrales de ciencia de computación.Resolver un problema mediante recursión significa que la solución depende de las soluciones de pequeñas instancias del mismo problema.
-<span class='float-right'>&#x2013; Recursión (ciencias de computación) - Wikipedia</span><br  />
-</p>
-</blockquote>
-
-
-</article>
-
-</slide>
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org4041a81" class="outline-3">
-<h3 id="org4041a81">Utilidad (Mediante ejemplo)</h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
-<div class="org-src-container">
-
-<pre class="prettyprint" data-lang="elixir">
-#suma.ex
-defmodule Suma do
-  def hasta(0), do: 0
-  def hasta(n), do: n + hasta(n - 1)
-end
-
-iex&gt;Suma.hasta(10)
-=10+hasta(9)
-=10+(9+hasta(8))
-=10+(9+(8+hasta(7)))
-=10+(9+(8+(7+(6+(5+(4+(3+(2+(1+(0))))))))))</pre>
-
-</div>
-<p>
-Puede causar algo llamado <b>Stackoverflow</b>
-</p>
-
-
-</article>
-
-</slide>
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org6619207" class="outline-3">
-<h3 id="org6619207">Recordando ejemplo</h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
-<div class="org-src-container">
-
-<pre class="prettyprint" data-lang="elixir">
-#factorial.exs
-defmodule Factorial do
-  def de(0), do: 1
-  def de(n), do: n * de(n-1)
-end</pre>
-
-</div>
-<p>
-Si calculamos el factorial de <code>1_000_000</code>. El consumo de memoria puede ocasionar el colapso total de nuestro sistema.
-</p>
-
-
-</article>
-
-</slide>
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org69451e6" class="outline-3">
-<h3 id="org69451e6">Arreglemos el factorial</h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
-<p>
-Para evitar stackoverflow, elixir nos aconseja que lo ultimo que hagamos en una función <b>recursiva</b> es ejecutar una función.
-Pero en nuestro caso necesitamos que el factorial se llame a si mismo al final de su ejecución.
-</p>
-<div class="org-src-container">
-
-<pre class="prettyprint" data-lang="elixir">
-defmodule Factorial do
-  def de(0), do: 1
-  def de(n), do: de(n-1)
-end
-# Ahora necesitamos ir acumulando resultados parciales cada vez que n se reduzca
-# (esto nos obliga a crear un nuevo parametro que sirva como acumulador)</pre>
-
-</div>
-
-
-</article>
-
-</slide>
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-org303fa17" class="outline-3">
-<h3 id="org303fa17"></h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
-<div class="org-src-container">
-
-<pre class="prettyprint" data-lang="elixir">
-defmodule Factorial do
-  def de(0,acc), do: 1
-  def de(n,acc), do: de(n-1,acc)
-end</pre>
-
-</div>
-
-<div class="org-src-container">
-
-<pre class="prettyprint" data-lang="elixir">
-# Agregamos la multiplicación  y al final de nuestro
-defmodule Factorial do
-  def de(0,acc), do: acc
-  def de(n,acc), do: de(n-1, acc*n)
-end
-iex&gt; Factorial(1,1) #1
-iex&gt; Factorial(2,1) #2</pre>
-
-</div>
-
-
-</article>
-
-</slide>
-
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-orge6f4ec8" class="outline-3">
-<h3 id="orge6f4ec8"></h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
-<div class="org-src-container">
-
-<pre class="prettyprint" data-lang="elixir">
-# cambiamos la funcion para que sea privada y sea utilizada por otra función
-defmodule Factorial do
-  def de(n), do: p_de(n,1)
-  defp p_de(0, acc), do: acc
-  defp p_de(n, acc), do: de(n-1, acc*n)
-end</pre>
-
-</div>
-
-
-</article>
-
-</slide>
-
-</slide>
-<slide id="sec-"  >
-<hgroup class="">
-       <h2 class=" "><div id="outline-container-orgf865ecc" class="outline-3">
-<h3 id="orgf865ecc">Más ejemplos</h3>
-</div>
-</h2>
-       <h3></h3>
-       </hgroup>
-<article class="" id="text-">
-<div class="org-src-container">
-
-<pre class="prettyprint" data-lang="elixir">
-iex&gt; MiLista.suma([1,2,3,4,5,6])
-21
-iex&gt; MiLista.longitud([1,2,3,4])
-4
-iex&gt; MiLista.map([1,2,3,4,5], &amp;(&amp;1*&amp;1))
-[1,4,9,16,25]
-iex&gt; MiLista.fibonacci([1,1], 7)
-[1,1,2,3,5,8,13]
-iex&gt; MiLista.tribonacci([1,1,1], 7)
-[1,1,1,3,5,9,17]</pre>
-
-</div>
-
-
-</article>
-
-</slide>
-
-</slide>
 
 </slide>
 <slide id="sec-" class=" thank-you-slide segue nobackground" style="background-image: url(nil)">
