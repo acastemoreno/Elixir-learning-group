@@ -1,0 +1,662 @@
+#+TITLE: Programación funcional con Elixir
+#+SUBTITLE: Elixir Learning Group - WiT Perú - 4ta Sesión
+#+DATE: 2017/11/21（Sabado）2:00pm
+#+AUTHOR: Albert Castellano Moreno
+#+EMAIL: acastemoreno@gmail.com
+#+OPTIONS: author:t c:nil creator:comment d:(not "LOGBOOK") date:t
+#+OPTIONS: e:t email:nil f:t inline:t num:nil p:nil pri:nil stat:t
+#+OPTIONS: tags:t tasks:t tex:t timestamp:t toc:nil todo:t |:t
+#+CREATOR: Emacs 25.2.1
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: es
+#+SELECT_TAGS: export
+
+#+GITHUB: http://github.com/acastemoreno
+
+#+FAVICON: images/elixir.png
+#+ICON: images/elixir.png
+
+* Proyectos
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+** Qué es Mix?
+Mix es una herramienta con el que mediante linea de comandos podemos manejar projectos Elixir. 
+
+Mix es usado para crear nuevos proyectos, manejar dependencias, ejecutar pruebas, ejecutar tu proyecto.
+
+** Creando un proyecto elixir
+Creamos nuestro primer proyecto Elixir usando el comando =mix new holi=
+
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 450px
+[[file:images/new_project.png]]
+#+END_CENTER
+
+** 
+Ahora observamos la siguiente estructura de archivos:
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 320px
+[[file:images/folder.png]]
+#+END_CENTER
+
+** Estructura
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+- =README.md=: Archivo Markdown que es usado para indicar requisitos y procedimientos para cuando otras personas usen nuestro proyecto, en especial cuando publiquemos nuestro proyecto en github.
+- =mix.exs=: Archivo que define el nombre de nuestro proyecto, la version, las dependencias, las librerias que necesitara nuestro proyecto, etc.
+- =.gitignore=: Archivo usado para manejar que archivos ignorados por git (control de versiones).
+- Carpeta =test=: Contendra codigo util para hacer testing.
+- Carpeta "lib": Contendra la mayoria del codigo de nuestra aplicación.
+  + Archivo =holi.ex=: Archivo con el nombre de nuestro proyecto. Modulo que representa nuestra aplicación.
+- Carpeta =config=: Contiene configuraciones de nuestra aplicación.
+** Holi Woli
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+Elixir tiene una convención. Dentro de la carpeta =/lib=, debes crear otra carpeta con el mismo nombre del proyecto. Aqui escribiremos nuestro codigo. El archivo =holi.exs= nos servira cuando debamos crear funciones que seran ejecutadas en el contexto de nuestro proyecto. 
+
+Por tanto en la carpeta =lib/holi/= crearemos nuestro primer modulo junto con una función:
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 550px
+[[file:images/holi.png]]
+#+END_CENTER
+** 
+Cargamos nuestro proyecto a iex para poder usarlo dentro de la shell con el comando =iex -S mix=
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 850px
+[[file:images/iex_-S_mix.png]]
+#+END_CENTER
+Observamos que adicional al clasico inicio de sesion, iex nos informa que se compilaron 2 archivos y que se genero la aplicacion holi.
+Ahora, al ejecutar la función =Holi.Woli.saludo=, este devolvera un string =Hola Amiguitos xD=. Ademas notaremos que se creo una carpeta =build= donde estaran todos los archivos compilados de nuestra aplicación.
+** Entendamos a mix (presiona la tecla =p=)
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 550px
+[[file:images/mix_exs.png]]
+#+END_CENTER
+
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+- Funciones =project= y =application= son importantes.
+- =start_permanent= indica que si nuestra aplicación se detiene, las dependencias tambien lo haran. 
+- =:observer.start=
+#+END_QUOTE
+
+** Testeo rapido (=mix test=) =p=
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 850px
+[[file:images/test.png]]
+#+END_CENTER
+Al haber ejecutado =mix test= observamos que se realizaron 2 test. En el archivo de test solo vemos uno. Donde esta el otro?
+#+ATTR_HTML: :class note
+#+BEGIN_QUOTE
+- =h Holi=
+- =h Holi.hello=
+#+END_QUOTE
+
+* Tools
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+** Documentación
+Elixir trata la documentación como un ciudadano de primera clase[fn:1]. Esto significa que la documentación debe ser fácil de escribir y fácil de leer.[fn:2]
+
+
+** Llevemos la documentación a otro nivel
+Instalamos [[https://github.com/elixir-lang/ex_doc][ExDoc]] en base a su documentación.
+- Para descargar e instalar una libreria ejecutamos =mix deps.get=
+- Para generar nuestra documentación ejecutamos =mix docs= (luego ubicamos el archivo index y lo abrimos en nuestro navegador)
+
+** 
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 520px
+[[file:images/ex_docs_html.png]]
+#+END_CENTER
+
+** Cuanta documentación me falta
+Instalamos [[https://github.com/rrrene/inch_ex][InchEx]] en base a su documentación.
+- Para descargar e instalar una libreria ejecutamos =mix deps.get= 
+- Compilamos el projecto con =mix compile=
+- Para generar nuestra documentación ejecutamos =mix inch=
+- Encontre un bug (Problema con al tipografia, es necesario instalar ruby y una gema, más info en [[https://github.com/rrrene/inch_ex/issues/43][Issue43]])
+** 
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 900px
+[[file:images/cover_doc.png]]
+#+END_CENTER
+
+** Cuanto testeo me falta
+Instalamos [[https://github.com/parroty/excoveralls][ExCoveralls]] en base a su documentación.
+- Para descargar e instalar una libreria ejecutamos =mix deps.get= 
+- Compilamos el projecto con =mix compile=
+- Para generar nuestra documentación ejecutamos =mix coveralls=
+** 
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 900px
+[[file:images/cover_test.png]]
+#+END_CENTER
+
+** Poner en practica
+- Agregar la documentacion y test que falta a =Holi.Woli=
+- Verificar que se cubra todo la documentacion y test necesario.
+- Generar la documentacion en html.
+** Ejercicio
+#+BEGIN_SRC elixir
+import Holi.Woli.tribonacci, only: [tribonacci: 2]
+  test "tribonacci" do
+    assert tribonacci({1, 1, 1}, 10) == [1,1,1,3,5,9,17,31,57,105]
+    assert tribonacci({0, 0, 1}, 10) == [0,0,1,1,2,4,7,13,24,44]
+    assert tribonacci({0, 1, 1}, 10) == [0,1,1,2,4,7,13,24,44,81]
+    assert tribonacci({1, 0, 0}, 10) == [1,0,0,1,1,2,4,7,13,24]
+    assert tribonacci({0, 0, 0}, 10) == [0,0,0,0,0,0,0,0,0,0]
+    assert tribonacci({1, 2, 3}, 10) == [1,2,3,6,11,20,37,68,125,230]
+    assert tribonacci({3, 2, 1}, 10) == [3,2,1,6,9,16,31,56,103,190]
+    assert tribonacci({1, 1, 1}, 1) == [1]
+    assert tribonacci({300, 200, 100}, 0) == []
+  end
+#+END_SRC
+
+* Programación Concurrente
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+** Datos
+- Whatsapp usa Erlang, empresa comprada con facebook por 19.000 millones de dolares.
+- Pinterest adopto Elixir
+  - De 1400 servidores pasaron a 70.
+  - Uno de sus servicios usaba 200 servidor con python, ahora solo usa 4 con elixir (podrian usar 2 pero decidieron usar 4 =porsiacaso=, tolarancia a fallos)
+  - Ahorran 2 millones de dolares al año solo en servidores.
+  - Su anterior sistema de notificaciones en java usaba 30 instancia EC2 de amazon; ahora solo usa 15.
+** Quienes ahora lo usan?
+- http://icanmakeitbetter.com/
+- [[http://bleacherreport.com/]]
+- Clientes de [[http://plataformatec.com.br/][Plataformatec]] (El cofundador de Plataformatec es el creador de Elixir, Jose Valim)
+- http://www.toyota-connect.com/sp/en/
+- https://xflag.com/
+- https://aktsk.jp/
+- http://www.drecom.co.jp/
+- http://dwango.co.jp/
+- https://gu3.co.jp/
+
+* Open Telephony Protocol (OTP)
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+** Qué es OTP?
+Es un framework de Erlang creado para construir sistemas distribuidos.
+
+Inicialmente se utilizó para construir centrales telefónicas y conmutadores.
+
+Sin embargo, estos dispositivos tienen las mismas caracteristicas que queremos para crear grandes aplicaciones online, asi que ahora OTP es una herramienta de proposito general para desarrollar y manejar grandes sistemas.
+
+** OTP: Application
+:PROPERTIES:
+:ARTICLE: smaller
+:END:
+OTP define sistemas en terminos de jerarquias de aplicaciones. 
+
+#+BEGIN_QUOTE
+一In OTP, application denotes a component implementing some specific functionality, that can be started and stopped as a unit, and which can be re-used in other systems as well.
+
+      -- OTP Documentation
+#+END_QUOTE
+Una aplicacion consiste en uno o más procesos. Cada uno de los procesos sigue uno de las pocas convenciones de OTP llamadas =behaviors=. Hay un =behavior= para implementar servidores de proposito general, otro para manejar eventos, etc.
+
+=Beam=, que es la maquina virtual donde Erlang y Elixir se ejecutan, puede ser vista como un sistema operativo. Donde cada programa en este sistema operativo es una aplicación. Los proyectos seran en realidad un conjunto de aplicaciones que usaran aplicaciones del mismo sistema operativo o de aplicaciones externas.
+
+** Why OTP?
+:PROPERTIES:
+:ARTICLE:  larger
+:END:
+Joe Armstrong dice OTP se ha utilizado para construir sistemas con 99.9999999% de fiabilidad. Eso son nueve nueves.
+
+Confiabilidad 99.9999999% equivalente a 1 segundo de inactividad cada 32 años. Cool.
+
+* Proyectos Mix son OTP Apps
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+
+** OTP ~= Modelo actor
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 350px
+[[file:images/super.png]]
+#+END_CENTER
+
+** OTP ~= Modelo actor
+:PROPERTIES:
+:FILL:   images/modelo_actor.png
+:TITLE:    white
+:SLIDE:    white
+:END:
+
+* Behavior GenServer
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+  Procesos que tienen estados y a los cuales se les hace consultas.
+
+** GenServer
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+Por terminal, nos ubicamos en una carpeta (en mi caso sera =dev=) y ejecutamos =mix new secuencia=.
+
+Se creara un proyecto mix. Ingresamos a la siguiente ruta =secuencia/lib= para crear una nueva carpeta con nombre =secuencia=.
+
+En esta carpeta creada escribiremos el siguiente codigo:
+#+BEGIN_SRC elixir
+#lib/secuencia/servidor_generico.ex
+defmodule Secuencia.ServidorGenerico do
+  use GenServer
+
+  def handle_call(:siguiente_numero, _from, estado_actual) do
+    { :reply, estado_actual, estado_actual + 1 }
+  end
+end
+#+END_SRC
+
+** GenServer
+=handle_call= recibe 3 parametros:
+- la informacion enviada por el cliente como primer parametro.
+- el PID del cliente como segundo parametro
+- el actual estado del servidor como tercer parametro
+
+y devuelve una tupla con el siguiente contenido:
+- =:reply= como primer elemento indica a OTP que se dara una respuesta al cliente
+- la respuesta al cliente es el segundo elemento de la tupla
+- el nuevo estado del servidor como tercer elemento
+
+** What? Esto que hace?
+Ejecutemos: 
+#+BEGIN_SRC elixir
+$ iex -S mix
+iex> { :ok, pid } = GenServer.start_link(Secuencia.ServidorGenerico, 100)
+{:ok,#PID<0.71.0>}
+iex> GenServer.call(pid, :siguiente_numero)
+100
+iex> GenServer.call(pid, :siguiente_numero)
+101
+iex> GenServer.call(pid, :siguiente_numero)
+102
+#+END_SRC
+
+** Ahora quiero que pasen cosas y que GenServer no responda
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+#+BEGIN_SRC elixir
+#lib/secuencia/servidor_generico.ex
+defmodule Secuencia.ServidorGenerico do
+  use GenServer
+
+  def handle_call(:siguiente_numero, _from, estado_actual) do
+    { :reply, estado_actual, estado_actual + 1 }
+  end
+
+  <b>def handle_cast({:incrementar_estado, delta}, estado_actual) do
+    { :noreply, estado_actual + delta}
+  end</b>
+end
+#+END_SRC
+=handle_cast= recibe 2 parametros: la información enviada por el cliente y el estado actual. Retorna una tupla que contiene =:noreply= como primer elemento que indica que no es necesario respuesta alguna y como segundo elemento el nuevo estado del servidor.
+
+** Probamos
+#+BEGIN_SRC elixir
+## Recompilamos
+iex> r Secuencia.ServidorGenerico
+...........
+iex> { :ok, pid } = GenServer.start_link(Secuencia.ServidorGenerico, 100)
+{:ok,#PID<0.60.0>}
+iex> GenServer.call(pid, :siguiente_numero)
+100
+iex> GenServer.call(pid, :siguiente_numero)
+101
+iex> GenServer.cast(pid, {:incrementar_estado, 200})
+:ok
+iex> GenServer.call(pid, :siguiente_numero)
+302
+#+END_SRC
+
+** 
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+#+BEGIN_SRC elixir
+#lib/secuencia/servidor_generico.ex
+defmodule Secuencia.ServidorGenerico do
+  use GenServer
+  
+  <b>def start_link(estado_inicial) do
+    GenServer.start_link(__MODULE__, estado_inicial, name: __MODULE__)
+  end
+
+  def siguiente_numero do
+    GenServer.call __MODULE__, :siguiente_numero
+  end
+
+  def incrementar_estado(delta) do
+    GenServer.cast __MODULE__, {:incrementar_estado, delta}
+  end</b>
+  
+  def handle_call(:siguiente_numero, _from, estado_actual) do
+    { :reply, estado_actual, estado_actual + 1 }
+  end
+
+  def handle_cast({:incrementar_estado, delta}, estado_actual) do
+    { :noreply, estado_actual + delta}
+  end
+end
+#+END_SRC
+
+** Probamos la API creada
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+#+BEGIN_SRC elixir
+$ iex -S mix
+iex> Secuencia.ServidorGenerico.start_link 123
+{:ok,#PID<0.57.0>}
+iex> Secuencia.ServidorGenerico.siguiente_numero
+123
+iex> Secuencia.ServidorGenerico.siguiente_numero
+124
+iex> Secuencia.ServidorGenerico.incrementar_estado 100
+:ok
+iex> Secuencia.ServidorGenerico.siguiente_numero
+225
+iex> Secuencia.ServidorGenerico.incrementar_estado "holi"
+<b>##El proceso muere y no se recupera</b>
+#+END_SRC
+
+* Behavior Supervisor
+  :PROPERTIES:
+  :SLIDE:    segue dark quote
+  :ASIDE:    right bottom
+  :ARTICLE:  flexbox vleft auto-fadein
+  :END:
+  No te preocupes mucho del codigo que genera fallos, preocupate que la aplicación siga funcionando.
+
+** Generando una aplicación supervisora
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+Ejecutamos el siguiente comando =mix new --sup super= y abrimos el archivo =/super/lib/super.ex=
+#+BEGIN_SRC elixir
+defmodule Super do
+  use Application
+
+  # See http://elixir-lang.org/docs/stable/elixir/Application.html
+  # for more information on OTP Applications
+  def start(_type, _args) do
+    import Supervisor.Spec, warn: false
+
+    # Define workers and child supervisors to be supervised
+    children = [
+      # Starts a worker by calling: Super.Worker.start_link(arg1, arg2, arg3)
+      # worker(Super.Worker, [arg1, arg2, arg3]),
+    ]
+
+    # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
+    # for other strategies and supported options
+    opts = [strategy: :one_for_one, name: Super.Supervisor]
+    Supervisor.start_link(children, opts)
+  end
+end
+#+END_SRC
+** 
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+Creamos el archivo =lib/super/servidor_generico.ex=, =similar= a lo hecho en genserver.
+#+BEGIN_SRC elixir
+defmodule <b>Super</b>.ServidorGenerico do
+  use GenServer
+  
+  def start_link(estado_inicial) do
+    GenServer.start_link(__MODULE__, estado_inicial, name: __MODULE__)
+  end
+
+  def siguiente_numero do
+    GenServer.call __MODULE__, :siguiente_numero
+  end
+
+  def incrementar_estado(delta) do
+    GenServer.cast __MODULE__, {:incrementar_estado, delta}
+  end
+  
+  def handle_call(:siguiente_numero, _from, estado_actual) do
+    { :reply, estado_actual, estado_actual + 1 }
+  end
+
+  def handle_cast({:incrementar_estado, delta}, estado_actual) do
+    { :noreply, estado_actual + delta}
+  end
+end
+#+END_SRC
+** 
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+Modificamos =/super/lib/super.ex= para que inicie =servidor_generico=
+#+BEGIN_SRC elixir
+defmodule Super do
+  use Application
+
+  # See http://elixir-lang.org/docs/stable/elixir/Application.html
+  # for more information on OTP Applications
+  def start(_type, _args) do
+    import Supervisor.Spec, warn: false
+
+    # Define workers and child supervisors to be supervised
+    children = [
+      # Starts a worker by calling: Super.Worker.start_link(arg1, arg2, arg3)
+      # worker(Super.Worker, [arg1, arg2, arg3]),
+      <b>worker(Super.ServidorGenerico, [123])</b>
+    ]
+
+    # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
+    # for other strategies and supported options
+    opts = [strategy: :one_for_one, name: Super.Supervisor]
+    Supervisor.start_link(children, opts)
+  end
+end
+#+END_SRC
+** Listo, ya tenemos todo listo para ejecutar
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+#+BEGIN_SRC elixir
+$ iex -S mix
+iex(1)> Super.ServidorGenerico.siguiente_numero    
+123
+iex(2)> Super.ServidorGenerico.siguiente_numero
+124
+iex(3)> Super.ServidorGenerico.incrementar_estado 10
+:ok
+iex(4)> Super.ServidorGenerico.siguiente_numero     
+135
+iex(5)> Super.ServidorGenerico.incrementar_estado "holi"
+##El procesos muere pero renace
+iex(6)> Super.ServidorGenerico.siguiente_numero         
+123
+#+END_SRC
+Ups. EL proceso fallece y se recupera pero el estado no se mantiene.
+** Manteniendo estados entre reinicios
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 350px
+[[file:images/super.png]]
+#+END_CENTER
+Fuente: Esta en el libro "programming-elixir 1.2" (pag 233).
+** 
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+Creo el modulo encargado de manejar el estado ante fallas.
+#+BEGIN_SRC elixir
+#/super/lib/super/estado.ex
+defmodule Super.Estado do
+  use GenServer
+  #####
+  # API Externa
+  def start_link(estado_inicial) do
+    GenServer.start_link(__MODULE__, estado_inicial, name: __MODULE__)
+  end
+  def guardar_estado(nuevo_valor) do
+    GenServer.cast __MODULE__, {:guardar_estado, nuevo_valor}
+  end
+  def obtener_estado(pid) do
+    GenServer.call __MODULE__, :obtener_estado
+  end
+  #####
+  # Implementacion GenServer
+  def handle_call(:obtener_estado, _from, estado_actual) do
+    {:reply, estado_actual, estado_actual}
+  end
+  def handle_cast({:guardar_estado, nuevo_valor}, _estado_actual) do
+    {:noreply, nuevo_valor}
+  end
+end
+#+END_SRC
+** Creo un =sub_supervisor=
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+#+BEGIN_SRC elixir
+#/super/lib/super/sub_supervisor.ex
+defmodule Super.SubSupervisor do
+  use Supervisor
+
+  def start_link() do
+    Supervisor.start_link(__MODULE__, [], name: __MODULE__)
+  end
+
+  def init([]) do
+    children = [
+      worker(Super.SubSupervisor.ServidorGenerico, [])
+    ]
+
+    # supervise/2 is imported from Supervisor.Spec
+    supervise(children, strategy: :one_for_one)
+  end
+end
+#+END_SRC
+** 
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+#+BEGIN_SRC elixir
+#/super/lib/super/sub_supervisor/servidor_generico.ex
+defmodule Super.SubSupervisor.ServidorGenerico do
+  use GenServer
+  def start_link() do
+    GenServer.start_link(__MODULE__, [], name: __MODULE__)
+  end
+  <b>def init([]) do
+    {:ok, Super.Estado.obtener_estado()}
+  end</b>
+  def siguiente_numero do
+    GenServer.call __MODULE__, :siguiente_numero
+  end
+  def incrementar_estado(delta) do
+    GenServer.cast __MODULE__, {:incrementar_estado, delta}
+  end
+  def handle_call(:siguiente_numero, _from, estado_actual) do
+    { :reply, estado_actual, estado_actual + 1 }
+  end
+  def handle_cast({:incrementar_estado, delta}, estado_actual) do
+    { :noreply, estado_actual + delta}
+  end
+  <b>def terminate(_reason, estado_antes_de_fallo) do
+    Super.Estado.guardar_estado(estado_antes_de_fallo)
+  end</b>
+end
+#+END_SRC
+** 
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+Añado los procesos =sub_supervisor= y =estado= a la aplicación:
+#+BEGIN_SRC elixir
+#/super/lib/super.ex
+defmodule Super do
+  use Application
+
+  # See http://elixir-lang.org/docs/stable/elixir/Application.html
+  # for more information on OTP Applications
+  def start(_type, _args) do
+    import Supervisor.Spec, warn: false
+
+    # Define workers and child supervisors to be supervised
+    children = [
+      # Starts a worker by calling: Super.Worker.start_link(arg1, arg2, arg3)
+      # worker(Super.Worker, [arg1, arg2, arg3]),
+      <b>worker(Super.Estado, [123]),
+      supervisor(Super.SubSupervisor, [])</b>
+    ]
+
+    # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
+    # for other strategies and supported options
+    opts = [strategy: :one_for_one, name: Super.Supervisor]
+    Supervisor.start_link(children, opts)
+  end
+end
+#+END_SRC
+
+** Ejecuto (se mantiene el estado aun con la falla)
+:PROPERTIES:
+:ARTICLE:  smaller
+:END:
+#+BEGIN_SRC elixir
+iex(1)> Super.SubSupervisor.ServidorGenerico.siguiente_numero
+123
+iex(2)> Super.SubSupervisor.ServidorGenerico.siguiente_numero
+124
+iex(3)> Super.SubSupervisor.ServidorGenerico.siguiente_numero
+125
+iex(4)> Super.SubSupervisor.ServidorGenerico.incrementar_estado 7
+:ok
+iex(5)> Super.SubSupervisor.ServidorGenerico.siguiente_numero    
+133
+iex(6)> Super.SubSupervisor.ServidorGenerico.incrementar_estado "holi"
+##El procesos muere pero renace
+iex(7)> Super.SubSupervisor.ServidorGenerico.siguiente_numero         
+134
+iex(8)> :observer.start
+#+END_SRC
+** <3
+#+BEGIN_CENTER
+#+ATTR_HTML: :width 750px
+[[file:images/observer.png]]
+#+END_CENTER
+
+* Gracias ˊ・ω・ˋ
+:PROPERTIES:
+:SLIDE: thank-you-slide segue
+:ASIDE: right
+:ARTICLE: flexbox vleft auto-fadein
+:END:
+
+* Footnotes
+[fn:1][[https://hexdocs.pm/elixir/writing-documentation.html][Writing Documentation]]
+[fn:2][[https://guides.github.com/features/mastering-markdown/][Mastering Markdown - Github]]
